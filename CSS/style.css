@@ -1,42 +1,13 @@
-.sbar {
-  margin-right: 30%;
+.orgcard {
+  padding: 50px 0px;
 }
 
-.sbar input {
-  width: 32vw;
-}
-
-.popbooks {
-  background-color: #f7f7f7;
-  padding: 30px 0px;
-  text-align: center;
-}
-
-.booklist {
-  display: flex;
-  justify-content: center;
-}
-
-.bookitem {
+.orgcard .card {
   margin: 10px;
-  height: 500px;
+  padding: 0px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-.bookimg {
-  width: 210px;
-  height: 300px;
-}
-
-.bookimg img {
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: 10px;
-}
-
-.bookitem button {
-  color: white;
-  background-color: darkblue;
-  border: 2px solid darkblue;
-  border-radius: 5px;
-  padding: 5px 40px;
+.orgcard .card-body {
+  padding: 12px;
 }
