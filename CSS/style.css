@@ -16,6 +16,10 @@
 
 
 
+.formcontact {
+  margin: 100px 0px;
+}
+
 .container .content {
   display: flex;
   align-items: center;
