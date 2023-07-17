@@ -10,8 +10,11 @@
 
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    
     />
+
+    <link rel="stylesheet" href="CSS/checkout_style.css">
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css" />
@@ -19,6 +22,7 @@
     <link rel="stylesheet" href="assets/css/animate.min.css" />
     <link rel="stylesheet" href="assets/css/price_rangs.css" />
     <link rel="stylesheet" href="assets/css/magnific-popup.css" />
+    <!-- <link rel="stylesheet" href="assets/css/fontawesome-all.min.css" /> -->
     <link rel="stylesheet" href="assets/css/themify-icons.css" />
     <link rel="stylesheet" href="assets/css/slick.css" />
     <link rel="stylesheet" href="assets/css/nice-select.css" />
@@ -39,9 +43,7 @@
                   >
                     <div class="header-info-left d-flex align-items-center">
                       <div class="logo">
-                        <a href="index.html"
-                          ><img src="Images/logo.png" alt="BookBridge"
-                        /></a>
+                        <a href="index.html"><img src="" alt="BookBridge" /></a>
                       </div>
 
                       <form action="#" class="form-box">
@@ -51,7 +53,7 @@
                           placeholder="Search book by author or publisher"
                         />
                         <div class="search-icon">
-                          <i class="bi bi-search"></i>
+                          <i class="ti-search"></i>
                         </div>
                       </form>
                     </div>
@@ -104,8 +106,8 @@
                             </li>
                           </ul>
                         </li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="categories.html">About Us</a></li>
+                        <li><a href="about.html">Contact Us</a></li>
                       </ul>
                     </nav>
                   </div>
@@ -232,45 +234,88 @@
         </div>
       </div>
     </header>
-    <br />
 
-    <!-- Register form -->
+    <!-- CheckOut -->
 
-    <main class="login-bg">
-      <div class="register-form-area">
-        <div class="register-form text-center">
-          <div class="register-heading">
-            <span>Register</span>
-            <p>Create your account to get full access</p>
-          </div>
+    <main>
+      <div class="container">
+        <div class="wrapper">
+            <div class="checkout-image">
+                <div class="info">
+                    <h2>Harry Potter</h2>
+                    <h4>J K Rowlling</h4>
+                    <h1>$14.98</h1>
+                    <p>
+                        <span>4-day rental</span>
+                        <img src="https://img.icons8.com/sf-regular/48/aaaaaa/forward.png" alt="Arrow" height="15px" width="15px" />
+                    </p>
+                    <img class="product-img" src="https://static.wikia.nocookie.net/harrypotter/images/9/97/Harry_Potter.jpg/revision/latest?cb=20140603201724" height="200px" alt="Product-Image" />
+                </div>
+                <div class="footer">
+                    
+                   
+                </div>
+            </div>
+            <div class="checkout-text">
+    
+                <div class="back-to-home">
+                    <a href="">Back to book gallery</a>
+                    <img src="https://img.icons8.com/sf-regular/48/aaaaaa/forward.png" alt="Arrow" height="15px" width="15px" />
+                    <a href="">Payment</a>
+                </div>
 
-          <div class="input-box">
-            <div class="single-input-fields">
-              <label>Full name</label>
-              <input type="text" placeholder="Enter full name" />
-            </div>
-            <div class="single-input-fields">
-              <label>Email Address</label>
-              <input type="email" placeholder="Enter email address" />
-            </div>
-            <div class="single-input-fields">
-              <label>Password</label>
-              <input type="password" placeholder="Enter Password" />
-            </div>
-            <div class="single-input-fields">
-              <label>Confirm Password</label>
-              <input type="password" placeholder="Confirm Password" />
-            </div>
-          </div>
+                <div class="pay-button">
+                    <button>
+                        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/mac-os.png" alt="Apple-Pay" height="20px" width="20px" />
+                        <span>Pay</span>
+                    </button>
+                </div>
 
-          <div class="register-footer">
-            <p>Already have an account? <a href="login.html"> Login</a> here</p>
-            <button class="submit-btn3">Sign Up</button>
-          </div>
+                <div class="or-line">
+                    <p>Or pay with card</p>
+                </div>
+    
+                <div class="card-details">
+                    <label>Card details</label>
+                    <div class="card-number">
+                        <input type="number" placeholder="4242 4242 4242 4242" />
+                        <div>
+                            <img src="https://img.icons8.com/color/48/000000/visa.png" height="20px" width="20px" />
+                            <img src="https://img.icons8.com/color/48/000000/mastercard.png" height="20px" width="20px" />
+                            <img src="https://img.icons8.com/color/48/000000/amex.png" height="20px" width="20px" />
+                        </div>
+                    </div>
+                    <div class="card-info">
+                        <div class="mm-yy">
+                            <input type="number" placeholder="MM / YY" />
+                        </div>
+                        <div class="cvc">
+                            <input type="number" placeholder="CVC" />
+                            <img src="https://img.icons8.com/ios/50/000000/card-verification-value.png" height="20px" width="20px" />
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="owner-name">
+                    <label>Owner name</label>
+                    <input type="text" placeholder="John Doe" />
+                </div>
+    
+                <div class="country-region">
+                    <label>Country or region</label>
+                    <select>
+                        <option>Sri Lanka</option>
+                        <option>India</option>
+                        <option>China</option>
+                    </select>
+                    <input type="number" placeholder="Zip code" />
+                </div>
+    
+                <button class="buy-button">Pay $583.98</button>
+    
+            </div>
         </div>
-      </div>
     </main>
-    <br /><br /><br /><br /><br />
 
     <!-- Footer -->
 
@@ -284,7 +329,7 @@
                   <div class="single-footer-caption mb-30">
                     <div class="footer-logo mb-25">
                       <a href="index.html"
-                        ><img src="Images/logo.png" alt="BookBridge"
+                        ><img src="assets/img/" alt="BookBridge"
                       /></a>
                     </div>
                     <div class="footer-tittle">
@@ -296,10 +341,12 @@
                     </div>
 
                     <div class="footer-social">
-                      <a href="#"><i class="bi bi-facebook"></i></a>
-                      <a href="#"><i class="bi bi-instagram"></i></a>
-                      <a href="#"><i class="bi bi-linkedin"></i></a>
-                      <a href="#"><i class="bi bi-youtube"></i></a>
+                      <a href="https://bit.ly/sai4ull"
+                        ><i class="fab fa-facebook"></i
+                      ></a>
+                      <a href="#"><i class="fab fa-instagram"></i></a>
+                      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                      <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                   </div>
                 </div>
@@ -339,9 +386,9 @@
                     <ul class="mb-20">
                       <li><a href="#">Home</a></li>
                       <li><a href="#">About Us</a></li>
-                      <li><a href="#">Contact Us</a></li>
-                      <li><a href="#">Register</a></li>
-                      <li><a href="#">Login</a></li>
+                      <li><a href="#">FAQs</a></li>
+                      <li><a href="#">Blog</a></li>
+                      <li><a href="#">Contact</a></li>
                     </ul>
                   </div>
                 </div>
