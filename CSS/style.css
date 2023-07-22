@@ -12,7 +12,9 @@
   padding: 12px;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+.orgcard .card-text {
+  height: 220px;
+}
 
 .formcontact {
   margin: 100px 0px;

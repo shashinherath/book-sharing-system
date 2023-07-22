@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap");
 .section-bg {
-  background-color: beige;
+  background-color: lightskyblue;
 }
 
 body {
@@ -1241,7 +1241,7 @@ hr {
 }
 
 .header-bottom {
-  background: beige;
+  background: lightskyblue;
 }
 
 .header-bottom .main-menu ul li {
@@ -1434,7 +1434,7 @@ hr {
 }
 
 .slider-area {
-  background-color: beige;
+  background-color: lightskyblue;
 }
 
 .slider-area .hero-caption span {
@@ -2180,7 +2180,7 @@ hr {
 .subscribe-area::before {
   position: absolute;
   content: "";
-  background: beige;
+  background: lightskyblue;
   height: 45%;
   width: 100%;
   right: 0px;
