@@ -172,3 +172,20 @@
 .guide1 {
   margin: 20px 150px;
 }
+
+.target-bg {
+  background-color: lightskyblue;
+  padding-top: 100px;
+  margin: 0px;
+}
+
+.target-info {
+  background-color: white;
+  text-align: center;
+  padding: 50px 180px;
+}
+
+.target-info p {
+  color: black;
+  font-size: 22px;
+}
