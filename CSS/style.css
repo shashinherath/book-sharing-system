@@ -180,12 +180,41 @@
 }
 
 .target-info {
-  background-color: white;
+  background-color: darkblue;
   text-align: center;
   padding: 50px 180px;
 }
 
 .target-info p {
-  color: black;
+  color: white;
   font-size: 22px;
+}
+
+.target-info h2 {
+  color: white;
+  font-weight: 700;
+}
+
+@media screen and (max-width: 600px) {
+  .target-info {
+    padding: 50px 20px;
+  }
+
+  .target-bg {
+    background-color: lightskyblue;
+    padding-top: 0;
+    margin: 0;
+  }
+}
+
+.slicknav_menu {
+  background-color: darkblue !important;
+}
+
+.slicknav_btn {
+  background-color: lightskyblue !important;
+}
+
+.marquee {
+  padding: 20px 120px;
 }
