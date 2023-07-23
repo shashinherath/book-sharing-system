@@ -34,16 +34,25 @@
   color: white;
 }
 
+.counter-card span {
+  color: darkblue;
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.counter-card i {
+  color: darkblue;
+  font-size: 40px;
+}
+
 .counter-card p {
   color: darkblue;
-  font-size: 36px;
-  font-weight: 900;
+  font-weight: bold;
 }
 
 .formcontact {
   margin: 100px 0px;
 }
-
 
 .container .content {
   display: flex;
