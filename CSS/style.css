@@ -16,6 +16,30 @@
   height: 220px;
 }
 
+.counter-card {
+  margin: 50px 0px;
+  padding: 50px 0px;
+  background-color: darkblue;
+}
+
+.counter-card .card {
+  width: 200px;
+  height: 200px;
+  margin: 25px;
+  padding: 0px;
+  text-align: center;
+}
+
+.counter-card h2 {
+  color: white;
+}
+
+.counter-card p {
+  color: darkblue;
+  font-size: 36px;
+  font-weight: 900;
+}
+
 .formcontact {
   margin: 100px 0px;
 }
