@@ -20,6 +20,7 @@
   margin: 100px 0px;
 }
 
+
 .container .content {
   display: flex;
   align-items: center;
@@ -46,12 +47,12 @@
   background: #afafb6;
 }
 .content .left-side .details {
-  margin: 14px;
+  margin: 15px;
   text-align: center;
 }
 .content .left-side .details i {
   font-size: 30px;
-  color: #3e2093;
+  color: #3104af;
   margin-bottom: 10px;
 }
 .content .left-side .details .topic {
@@ -60,21 +61,21 @@
 }
 .content .left-side .details .text-one,
 .content .left-side .details .text-two {
-  font-size: 14px;
-  color: #afafb6;
+  font-size: 15px;
+  color: #5959c5;
 }
 
 .container .content .right-side {
-  width: 75%;
-  margin-left: 75px;
+  width: 100%;
+  margin-left: 100px;
 }
 .content .right-side .topic-text {
-  font-size: 23px;
-  font-weight: 600;
-  color: #3e2093;
+  font-size: 30px;
+  font-weight: 500;
+  color: #1c0b6d;
 }
 .right-side .input-box {
-  height: 55px;
+  height: 60px;
   width: 100%;
   margin: 12px 0;
 }
@@ -85,7 +86,7 @@
   border: none;
   outline: none;
   font-size: 16px;
-  background: #f0f1f8;
+  background: #c4c4f1;
   border-radius: 6px;
   padding: 0 15px;
   resize: none;
@@ -101,18 +102,18 @@
   margin-top: 12px;
 }
 .right-side .button input[type="button"] {
-  color: #fff;
+  color: #dadada;
   font-size: 18px;
   outline: none;
   border: none;
   padding: 8px 16px;
   border-radius: 6px;
-  background: #3e2093;
+  background: #482899;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 .button input[type="button"]:hover {
-  background: #5029bc;
+  background: #d6d1e2;
 }
 
 @media (max-width: 950px) {
@@ -174,7 +175,7 @@
 }
 
 .target-bg {
-  background-color: lightskyblue;
+  background-color: rgb(44, 135, 191);
   padding-top: 100px;
   margin: 0px;
 }
