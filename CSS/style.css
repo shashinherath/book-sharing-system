@@ -297,3 +297,40 @@ input[type="textarea"]:focus {
 .success-slider .carousel .card {
   border: none;
 }
+
+
+
+
+.counter-card1 {
+  margin: 50px 0px;
+  padding: 50px 0px;
+  background-color: rgb(243, 47, 47);
+}
+
+.counter-card1 .card {
+  width: 200px;
+  height: 200px;
+  margin: 25px;
+  padding: 0px;
+  text-align: center;
+}
+
+.counter-card1 h2 {
+  color: rgb(255, 255, 255);
+}
+
+.counter-card1 span {
+  color: darkblue;
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.counter-card1 i {
+  color: darkblue;
+  font-size: 40px;
+}
+
+.counter-card1 p {
+  color: darkblue;
+  font-weight: bold;
+}
