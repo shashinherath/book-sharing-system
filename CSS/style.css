@@ -298,9 +298,6 @@ input[type="textarea"]:focus {
   border: none;
 }
 
-
-
-
 .counter-card1 {
   margin: 50px 0px;
   padding: 50px 0px;
@@ -333,4 +330,32 @@ input[type="textarea"]:focus {
 .counter-card1 p {
   color: darkblue;
   font-weight: bold;
+}
+
+.login-bg {
+  margin-bottom: 220px;
+}
+
+.headericon {
+  text-align: center;
+  margin: 0px 20px;
+}
+
+.headericon .bi {
+  font-size: 30px;
+}
+
+.headericonlist a {
+  color: darkblue !important;
+}
+
+.headericonlist a:hover {
+  color: blue !important;
+}
+
+.headericonlist .cardcount {
+  background-color: darkblue;
+  color: white;
+  padding: 5px;
+  border-radius: 10px;
 }
