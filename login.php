@@ -1,3 +1,35 @@
+<?php
+
+session_start();
+
+include("database.php");
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    if (!empty($email) && !empty($password) && !is_numeric($email)) {
+        $query = "select * from user where email = '$email' limit 1";
+        $result = mysqli_query($con, $query);
+
+        if ($result) {
+            if ($result && mysqli_num_rows($result) > 0) {
+                $user_data = mysqli_fetch_assoc($result);
+                if ($user_data['password'] == $password) {
+                    header("location:index.php");
+                    die;
+                }
+            }
+
+        }
+        echo "<script type='text/javascript'> alert('Wrong user name or password')</script>";
+    } else {
+        echo "<script type='text/javascript'> alert('Wrong user name or password')</script>";
+    }
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -39,7 +71,7 @@
                   >
                     <div class="header-info-left d-flex align-items-center">
                       <div class="logo">
-                        <a href="index.html"
+                        <a href="index.php"
                           ><img src="Images/logo.png" alt="BookBridge"
                         /></a>
                       </div>
@@ -75,7 +107,7 @@
               <div class="row align-items-center">
                 <div class="col-xl-12">
                   <div class="logo2">
-                    <a href="index.html"
+                    <a href="index.php"
                       ><img src="Images/logo.png" alt="BookBridge"
                     /></a>
                   </div>
@@ -83,30 +115,30 @@
                   <div class="main-menu text-center d-none d-lg-block">
                     <nav>
                       <ul id="navigation">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.php">Home</a></li>
                         <li>
                           <a href="#">Categories</a>
                           <ul class="submenu">
                             <li>
-                              <a href="guidline.html">Donation Guidelines</a>
+                              <a href="guidline.php">Donation Guidelines</a>
                             </li>
                             <li>
-                              <a href="organizations.html"
+                              <a href="organizations.php"
                                 >Recipient Organizations</a
                               >
                             </li>
-                            <li><a href="Stories.html">Success Stories</a></li>
+                            <li><a href="Stories.php">Success Stories</a></li>
                             <li>
-                              <a href="resources.html">Educational Resources</a>
+                              <a href="resources.php">Educational Resources</a>
                             </li>
                             <li>
-                              <a href="forums.html">Community Forums</a>
+                              <a href="forums.php">Community Forums</a>
                             </li>
                           </ul>
                         </li>
-                        <li><a href="books.html">Books</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="books.php">Books</a></li>
+                        <li><a href="about.php">About Us</a></li>
+                        <li><a href="contact.php">Contact Us</a></li>
                       </ul>
                     </nav>
                   </div>
@@ -133,15 +165,15 @@
             <span>Login</span>
             <p>Enter Login details to get access</p>
           </div>
-
+            <form method="post">
           <div class="input-box">
             <div class="single-input-fields">
-              <label>Username or Email Address</label>
-              <input type="text" placeholder="Username / Email address" />
+              <label>Email Address</label>
+              <input type="text" name="email" placeholder="Email address" required/>
             </div>
             <div class="single-input-fields">
               <label>Password</label>
-              <input type="password" placeholder="Enter Password" />
+              <input type="password" name="password" placeholder="Enter Password" required/>
             </div>
             <div class="single-input-fields login-check">
               <input type="checkbox" id="fruit1" name="keep-log" />
@@ -156,6 +188,7 @@
             </p>
             <button class="submit-btn3">Login</button>
           </div>
+            </form>
         </div>
       </div>
     </main>
@@ -171,7 +204,7 @@
                 <div class="single-footer-caption mb-50">
                   <div class="single-footer-caption mb-30">
                     <div class="footer-logo mb-25">
-                      <a href="index.html"
+                      <a href="index.php"
                         ><img src="Images/logo.png" alt="BookBridge"
                       /></a>
                     </div>

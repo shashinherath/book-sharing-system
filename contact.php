@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>BookBridge</title>
+    <script src="https://kit.fontawesome.com/76455c8101.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="CSS/style.css" />
 
@@ -39,7 +40,7 @@
                   >
                     <div class="header-info-left d-flex align-items-center">
                       <div class="logo">
-                        <a href="index.html"
+                        <a href="index.php"
                           ><img src="Images/logo.png" alt="BookBridge"
                         /></a>
                       </div>
@@ -61,7 +62,7 @@
                           <a href="register.html" class="btn header-btn"
                             >Register</a
                           >
-                          <a href="login.html" class="btn header-btn">Login</a>
+                          <a href="login.php" class="btn header-btn">Login</a>
                         </li>
                       </ul>
                     </div>
@@ -75,7 +76,7 @@
               <div class="row align-items-center">
                 <div class="col-xl-12">
                   <div class="logo2">
-                    <a href="index.html"
+                    <a href="index.php"
                       ><img src="Images/logo.png" alt="BookBridge"
                     /></a>
                   </div>
@@ -83,29 +84,29 @@
                   <div class="main-menu text-center d-none d-lg-block">
                     <nav>
                       <ul id="navigation">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.php">Home</a></li>
                         <li>
                           <a href="#">Categories</a>
                           <ul class="submenu">
                             <li>
-                              <a href="guidline.html">Donation Guidelines</a>
+                              <a href="guidline.php">Donation Guidelines</a>
                             </li>
                             <li>
-                              <a href="organizations.html"
+                              <a href="organizations.php"
                                 >Recipient Organizations</a
                               >
                             </li>
-                            <li><a href="Stories.html">Success Stories</a></li>
+                            <li><a href="Stories.php">Success Stories</a></li>
                             <li>
-                              <a href="resources.html">Educational Resources</a>
+                              <a href="resources.php">Educational Resources</a>
                             </li>
                             <li>
-                              <a href="forums.html">Community Forums</a>
+                              <a href="forums.php">Community Forums</a>
                             </li>
                           </ul>
                         </li>
-                        <li><a href="books.html">Books</a></li>
-                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="books.php">Books</a></li>
+                        <li><a href="about.php">About Us</a></li>
                         <li><a href="contact.html">Contact Us</a></li>
                       </ul>
                     </nav>
@@ -124,18 +125,19 @@
       </div>
     </header>
 
-    <!-- about -->
+    <!-- contact -->
 
     <main>
+    
       <div class="container">
         <div class="row">
           <div class="col-xl-12">
             <div class="slider-area">
               <div
-                class="slider-height2 slider-bg5 d-flex align-items-center justify-content-center"
+                class="slider-height2 slider-bg6 d-flex align-items-center justify-content-center"
               >
                 <div class="hero-caption hero-caption2">
-                  <h2>About Us</h2>
+                  <h2>Contact Us</h2>
                 </div>
               </div>
             </div>
@@ -143,47 +145,45 @@
         </div>
       </div>
 
-      <div class="about-details">
-        <div class="container">
-          <div class="row">
-            <div class="offset-xl-1 col-xl-10 col-lg-8">
-              <div class="section-tittle mb-15">
-                <h2>Our Vision</h2>
-              </div>
+      <div class="container formcontact">
+        <div class="content">
+          <div class="left-side">
+            <div class="address details">
+              <i class="fas fa-map-marker-alt"></i>
+              <div class="topic">Address</div>
+              <div class="text-one">Uva Wellasa university</div>
+              <div class="text-two">Badulla</div>
             </div>
-            <div class="offset-xl-1 col-xl-9">
-              <div class="about-pera">
-                <p>
-                  "Our vision is to foster a world where every individual has
-                  access to books, regardless of their background or
-                  circumstances. We envision a society where literacy thrives,
-                  knowledge is shared, and opportunities are abundant. Through
-                  our book donation site, we strive to empower communities,
-                  inspire lifelong learning, and ignite a love for reading."
-                </p>
-              </div>
+            <div class="phone details">
+              <i class="fas fa-phone-alt"></i>
+              <div class="topic">Phone</div>
+              <div class="text-one">066-2287547</div>
+              <div class="text-two">076-9003096</div>
+            </div>
+            <div class="email details">
+              <i class="fas fa-envelope"></i>
+              <div class="topic">Email</div>
+              <div class="text-one">bookbridge@gmail.com</div>
+              <div class="text-two">info@bookbridge.com</div>
             </div>
           </div>
-          <div class="row">
-            <div class="offset-xl-1 col-xl-10 col-lg-8">
-              <div class="section-tittle mb-15">
-                <h2>Our Mission</h2>
+          <div class="right-side">
+            <div class="topic-text">Send us a message</div>
+            <p></p>
+            <form action="#">
+              <div class="input-box">
+                <input type="text" placeholder="Enter your name" />
               </div>
-            </div>
-            <div class="offset-xl-1 col-xl-9">
-              <div class="about-pera p-0">
-                <p>
-                  "Our mission is to connect passionate book donors with
-                  individuals, schools, libraries, and organizations in need of
-                  books. We aim to create a platform that simplifies the book
-                  donation process, promotes literacy, and enables individuals
-                  to make a meaningful impact in their communities. By
-                  facilitating the redistribution of books, we aspire to bridge
-                  the literacy gap and empower individuals to reach their full
-                  potential."
-                </p>
+              <div class="input-box">
+                <input type="text" placeholder="Enter your email" />
               </div>
-            </div>
+              <div class="input-box message-box">
+                <textarea placeholder="Enter your message"></textarea>
+              </div>
+              <div class="button">
+                <a href="#" class="btn header-btn">Submit</a>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -200,7 +200,7 @@
                 <div class="single-footer-caption mb-50">
                   <div class="single-footer-caption mb-30">
                     <div class="footer-logo mb-25">
-                      <a href="index.html"
+                      <a href="index.php"
                         ><img src="Images/logo.png" alt="BookBridge"
                       /></a>
                     </div>

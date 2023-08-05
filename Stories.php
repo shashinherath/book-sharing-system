@@ -36,7 +36,7 @@
                 <div class="d-flex justify-content-between align-items-center flex-sm">
                   <div class="header-info-left d-flex align-items-center">
                     <div class="logo">
-                      <a href="index.html"><img src="Images/logo.png" alt="BookBridge" /></a>
+                      <a href="index.php"><img src="Images/logo.png" alt="BookBridge" /></a>
                     </div>
 
                     <form action="#" class="form-box">
@@ -50,7 +50,7 @@
                     <ul>
                       <li>
                         <a href="register.html" class="btn header-btn">Register</a>
-                        <a href="login.html" class="btn header-btn">Login</a>
+                        <a href="login.php" class="btn header-btn">Login</a>
                       </li>
                     </ul>
                   </div>
@@ -64,34 +64,34 @@
             <div class="row align-items-center">
               <div class="col-xl-12">
                 <div class="logo2">
-                  <a href="index.html"><img src="Images/logo.png" alt="BookBridge" /></a>
+                  <a href="index.php"><img src="Images/logo.png" alt="BookBridge" /></a>
                 </div>
 
                 <div class="main-menu text-center d-none d-lg-block">
                   <nav>
                     <ul id="navigation">
-                      <li><a href="index.html">Home</a></li>
+                      <li><a href="index.php">Home</a></li>
                       <li>
                         <a href="#">Categories</a>
                         <ul class="submenu">
                           <li>
-                            <a href="guidline.html">Donation Guidelines</a>
+                            <a href="guidline.php">Donation Guidelines</a>
                           </li>
                           <li>
-                            <a href="organizations.html">Recipient Organizations</a>
+                            <a href="organizations.php">Recipient Organizations</a>
                           </li>
                           <li><a href="Stories.html">Success Stories</a></li>
                           <li>
-                            <a href="resources.html">Educational Resources</a>
+                            <a href="resources.php">Educational Resources</a>
                           </li>
                           <li>
-                            <a href="forums.html">Community Forums</a>
+                            <a href="forums.php">Community Forums</a>
                           </li>
                         </ul>
                       </li>
-                      <li><a href="books.html">Books</a></li>
-                      <li><a href="about.html">About Us</a></li>
-                      <li><a href="contact.html">Contact Us</a></li>
+                      <li><a href="books.php">Books</a></li>
+                      <li><a href="about.php">About Us</a></li>
+                      <li><a href="contact.php">Contact Us</a></li>
                     </ul>
                   </nav>
                 </div>
@@ -106,13 +106,13 @@
                           class="slicknav_icon-bar"></span></span></a>
                     <ul class="slicknav_nav slicknav_hidden" aria-hidden="true" role="menu" style="display: none">
                       <li>
-                        <a href="index.html" role="menuitem" tabindex="-1">Home</a>
+                        <a href="index.php" role="menuitem" tabindex="-1">Home</a>
                       </li>
                       <li>
                         <a href="categories.html" role="menuitem" tabindex="-1">Categories</a>
                       </li>
                       <li>
-                        <a href="about.html" role="menuitem" tabindex="-1">About</a>
+                        <a href="about.php" role="menuitem" tabindex="-1">About</a>
                       </li>
                       <li class="slicknav_collapsed slicknav_parent">
                         <a href="#" role="menuitem" aria-haspopup="true" tabindex="-1"
@@ -120,13 +120,13 @@
                           <span class="slicknav_arrow">+</span></a>
                         <ul class="submenu slicknav_hidden" role="menu" aria-hidden="true" style="display: none">
                           <li>
-                            <a href="login.html" role="menuitem" tabindex="-1">login</a>
+                            <a href="login.php" role="menuitem" tabindex="-1">login</a>
                           </li>
                           <li>
-                            <a href="cart.html" role="menuitem" tabindex="-1">Cart</a>
+                            <a href="cart.php" role="menuitem" tabindex="-1">Cart</a>
                           </li>
                           <li>
-                            <a href="checkout.html" role="menuitem" tabindex="-1">Checkout</a>
+                            <a href="checkout.php" role="menuitem" tabindex="-1">Checkout</a>
                           </li>
                           <li>
                             <a href="book-details.html" role="menuitem" tabindex="-1">book Details</a>
@@ -143,7 +143,7 @@
                         <a href="blog.html" role="menuitem" tabindex="-1">Blog</a>
                       </li>
                       <li>
-                        <a href="contact.html" role="menuitem" tabindex="-1">Contect</a>
+                        <a href="contact.php" role="menuitem" tabindex="-1">Contect</a>
                       </li>
                     </ul>
                   </div>
@@ -326,7 +326,7 @@
               <div class="single-footer-caption mb-50">
                 <div class="single-footer-caption mb-30">
                   <div class="footer-logo mb-25">
-                    <a href="index.html"><img src="Images/logo.png" alt="BookBridge" /></a>
+                    <a href="index.php"><img src="Images/logo.png" alt="BookBridge" /></a>
                   </div>
                   <div class="footer-tittle">
                     <div class="footer-pera">

@@ -39,7 +39,7 @@
                   >
                     <div class="header-info-left d-flex align-items-center">
                       <div class="logo">
-                        <a href="index.html"
+                        <a href="index.php"
                           ><img src="Images/logo.png" alt="BookBridge"
                         /></a>
                       </div>
@@ -61,7 +61,7 @@
                           <a href="register.html" class="btn header-btn"
                             >Register</a
                           >
-                          <a href="login.html" class="btn header-btn">Login</a>
+                          <a href="login.php" class="btn header-btn">Login</a>
                         </li>
                       </ul>
                     </div>
@@ -75,7 +75,7 @@
               <div class="row align-items-center">
                 <div class="col-xl-12">
                   <div class="logo2">
-                    <a href="index.html"
+                    <a href="index.php"
                       ><img src="Images/logo.png" alt="BookBridge"
                     /></a>
                   </div>
@@ -83,30 +83,30 @@
                   <div class="main-menu text-center d-none d-lg-block">
                     <nav>
                       <ul id="navigation">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.php">Home</a></li>
                         <li>
                           <a href="#">Categories</a>
                           <ul class="submenu">
                             <li>
-                              <a href="guidline.html">Donation Guidelines</a>
+                              <a href="guidline.php">Donation Guidelines</a>
                             </li>
                             <li>
-                              <a href="organizations.html"
+                              <a href="organizations.php"
                                 >Recipient Organizations</a
                               >
                             </li>
-                            <li><a href="Stories.html">Success Stories</a></li>
+                            <li><a href="Stories.php">Success Stories</a></li>
                             <li>
-                              <a href="resources.html">Educational Resources</a>
+                              <a href="resources.php">Educational Resources</a>
                             </li>
                             <li>
                               <a href="forums.html">Community Forums</a>
                             </li>
                           </ul>
                         </li>
-                        <li><a href="books.html">Books</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="books.php">Books</a></li>
+                        <li><a href="about.php">About Us</a></li>
+                        <li><a href="contact.php">Contact Us</a></li>
                       </ul>
                     </nav>
                   </div>
@@ -195,7 +195,7 @@
                 <div class="single-footer-caption mb-50">
                   <div class="single-footer-caption mb-30">
                     <div class="footer-logo mb-25">
-                      <a href="index.html"
+                      <a href="index.php"
                         ><img src="Images/logo.png" alt="BookBridge"
                       /></a>
                     </div>
