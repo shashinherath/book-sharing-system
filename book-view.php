@@ -155,13 +155,14 @@
                       if (isset($result)) {
                           $row = mysqli_fetch_assoc($result);
                       } else {
+                          $row['image'] = 'https://books.google.lk/books/publisher/content?id=0UZLDwAAQBAJ&pg=PP1&img=1&zoom=3&hl=en&bul=1&sig=ACfU3U3HlOoWTRanr3bk01qn-6_BhGghEQ&w=1280';
                           $row['book_name'] = 'Sri Lanka at the Crossroads of History';
                           $row['price'] = '1500.00';
                           $row['description'] = 'The peoples of Sri Lanka have participated in far-flung trading networks, religious formations, and Asian and European empires for millennia. This interdisciplinary volume sets out to draw Sri Lanka into the field of Asian and Global History by showing how the latest wave of scholarship has explored the island as a ‘crossroads’, a place defined by its openness to movement across the Indian Ocean.Experts in the history, archaeology, literature and art of the island from c.500 BCE to c.1850 CE use Lankan material to explore a number of pressing scholarly debates. They address these matters from their varied disciplinary perspectives and diverse array of sources, critically assessing concepts such as ethnicity, cosmopolitanism and localisation, and elucidating the subtle ways in which the ...';
                       }
                       echo '
                     <div class="features-img">
-                      <img src="assets/img/gallery/best-books1.jpg" alt="" />
+                      <img width="282px" height="427px" src="'.$row['image'].'" alt="'.$row['book_name'].'" />
                     </div>
                     <div class="features-caption">
                       <h3>'.$row['book_name'].'</h3>
