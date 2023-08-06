@@ -357,10 +357,3 @@ input[type="textarea"]:focus {
 .headericonlist a:hover {
   color: blue !important;
 }
-
-.headericonlist .cardcount {
-  background-color: darkblue;
-  color: white;
-  padding: 5px;
-  border-radius: 10px;
-}

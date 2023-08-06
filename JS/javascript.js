@@ -26,3 +26,10 @@ $(".carousel").owlCarousel({
     },
   },
 });
+
+var cartcount = 0;
+function cartadd(){
+  cartcount++;
+  document.getElementById('cartcount').innerHTML = cartcount;
+  document.cookie = "jscartcount = " + cartcount;
+}

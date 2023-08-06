@@ -1,9 +1,21 @@
 <?php
     session_start();
 
+    $_SESSION['cartcnt'] = (isset($_SESSION['cartcnt'])) ? $_SESSION['cartcnt'] : 0;
+
     include('database.php');
 
     $isbn = isset($_GET['isbn']) ? $_GET['isbn'] : null;
+
+    if (isset($_SESSION['email'])) {
+        $email = $_SESSION['email'];
+        $queryuser = "SELECT * FROM user where email = '$email' ";
+        $resultuser = mysqli_query($con, $queryuser);
+
+        if (!$resultuser) {
+            die("Error: " . mysqli_error($con));
+        }
+    }
 
     if (isset($isbn)) {
         $query = "SELECT * FROM books where isbn = '$isbn'";
@@ -74,12 +86,33 @@
                     </div>
                     <div class="header-info-right d-flex align-items-center">
                       <ul>
-                        <li>
+                          <?php
+                          if (isset($resultuser)) {
+                              $rowuser = mysqli_fetch_assoc($resultuser);
+                          }
+
+                          $_SESSION['cartcnt'] = $_COOKIE['jscartcount'];
+
+                          if (isset($_SESSION['login'])) {
+                              echo '<li class="headericonlist">
+                          <a href="cart.php" class="headericon"
+                            ><i class="bi bi-cart"></i><br />
+                            <span id="cartcount">'.$_SESSION['cartcnt'].'</span></a
+                          >
+                          <a href="profile.php" class="headericon"
+                            ><i class="bi bi-person-circle"></i><br />
+                            <span>'. $rowuser['name'] .'</span>
+                          </a>';
+                          }
+                          else {
+                              echo '<li>
                           <a href="register.php" class="btn header-btn"
                             >Register</a
                           >
                           <a href="login.php" class="btn header-btn">Login</a>
-                        </li>
+                        </li>';
+                          }
+                          ?>
                       </ul>
                     </div>
                   </div>
@@ -178,9 +211,9 @@
                           <i class="bi bi-star-fill"></i>
                           <i class="bi bi-star-half"></i>
                         </div>
-                        <p>(120 Review)</p>
+                        <p>(137 Review)</p>
                       </div>
-                      <a href="#" class="white-btn mr-10">Add to Cart</a>
+                      <a href="#" onclick="cartadd()" class="white-btn mr-10" >Add to Cart</a>
                     </div>
                     
 
@@ -568,5 +601,6 @@
 
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="JS/javascript.js"></script>
   </body>
 </html>
