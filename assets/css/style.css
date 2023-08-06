@@ -1431,7 +1431,7 @@ hr {
 
 .slider-bg6 {
   background-image: url(https://t4.ftcdn.net/jpg/02/69/27/55/360_F_269275503_fL3Dx8hgvCDgrnuvbm8XLPHJ461QIM4o.jpg);
-}  
+}
 
 .slider-area {
   background-color: lightskyblue;
@@ -1895,7 +1895,7 @@ hr {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  background-color: darkblue;
+  background-color: currentColor;
   padding: 29px 20px 29px 80px;
 }
 

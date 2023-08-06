@@ -49,7 +49,7 @@
                   <div class="header-info-right d-flex align-items-center">
                     <ul>
                       <li>
-                        <a href="register.html" class="btn header-btn">Register</a>
+                        <a href="register.php" class="btn header-btn">Register</a>
                         <a href="login.php" class="btn header-btn">Login</a>
                       </li>
                     </ul>

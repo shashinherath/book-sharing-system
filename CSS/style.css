@@ -301,7 +301,7 @@ input[type="textarea"]:focus {
 .counter-card1 {
   margin: 50px 0px;
   padding: 50px 0px;
-  background-color: rgb(243, 47, 47);
+  background-color: darkblue;
 }
 
 .counter-card1 .card {

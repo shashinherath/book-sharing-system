@@ -1,7 +1,13 @@
 <?php
     session_start();
-    $_SESSION['title'] = 'Hello';
-    $_SESSION['price'] = 40;
+
+    include('database.php');
+
+    $query = "SELECT * FROM books";
+    $result = mysqli_query($con, $query);
+    if (!$result) {
+        die("Error: " . mysqli_error($con));
+    }
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +70,7 @@
                     <div class="header-info-right d-flex align-items-center">
                       <ul>
                         <li>
-                          <a href="register.html" class="btn header-btn"
+                          <a href="register.php" class="btn header-btn"
                             >Register</a
                           >
                           <a href="login.php" class="btn header-btn">Login</a>
@@ -110,7 +116,7 @@
                             </li>
                           </ul>
                         </li>
-                        <li><a href="books.html">Books</a></li>
+                        <li><a href="books.php">Books</a></li>
                         <li><a href="about.php">About Us</a></li>
                         <li><a href="contact.php">Contact Us</a></li>
                       </ul>
@@ -376,7 +382,9 @@
               </div>
               <div class="best-selling p-0">
                 <div class="row">
-                  <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-12 col-sm-6">
+                    <?php
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '<div class="col-xxl-3 col-xl-4 col-lg-4 col-md-12 col-sm-6">
                     <div class="properties pb-30">
                       <div class="properties-card">
                         <div class="properties-img">
@@ -387,7 +395,7 @@
                           /></a>
                         </div>
                         <div class="properties-caption properties-caption2">
-                          <h3><a href="book-view.php">Moon Dance</a></h3>
+                          <h3><a href="book-view.php?isbn='.$row['isbn'].'">' . $row['book_name']. '</a></h3>
                           <p>J. R Rain</p>
                           <div
                             class="properties-footer d-flex justify-content-between align-items-center"
@@ -403,13 +411,16 @@
                               <p>(<span>120</span> Review)</p>
                             </div>
                             <div class="price">
-                              <span>$50</span>
+                              <span>Rs. '.$row['price'].'</span>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div>';
+                        }
+                    ?>
+
                   <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-12 col-sm-6">
                     <div class="properties pb-30">
                       <div class="properties-card">

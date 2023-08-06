@@ -1,3 +1,20 @@
+<?php
+    session_start();
+
+    include('database.php');
+
+    if (isset($_SESSION['email'])) {
+        $email = $_SESSION['email'];
+        $query = "SELECT * FROM user where email = '$email' ";
+        $result = mysqli_query($con, $query);
+
+        if (!$result) {
+            die("Error: " . mysqli_error($con));
+        }
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -47,7 +64,7 @@
                   >
                     <div class="header-info-left d-flex align-items-center">
                       <div class="logo">
-                        <a href="index.html"
+                        <a href="index.php"
                           ><img src="Images/logo.png" alt="BookBridge"
                         /></a>
                       </div>
@@ -65,12 +82,31 @@
                     </div>
                     <div class="header-info-right d-flex align-items-center">
                       <ul>
-                        <li>
-                          <a href="register.html" class="btn header-btn"
+                          <?php
+                          if (isset($result)) {
+                              $row = mysqli_fetch_assoc($result);
+                          }
+
+                            if (isset($_SESSION['login'])) {
+                                echo '<li class="headericonlist">
+                          <a href="cart.php" class="headericon"
+                            ><i class="bi bi-cart"></i><br />
+                            <span class="cardcount">0</span></a
+                          >
+                          <a href="profile.php" class="headericon"
+                            ><i class="bi bi-person-circle"></i><br />
+                            <span>'. $row['name'] .'</span>
+                          </a>';
+                            }
+                            else {
+                                echo '<li>
+                          <a href="register.php" class="btn header-btn"
                             >Register</a
                           >
                           <a href="login.php" class="btn header-btn">Login</a>
-                        </li>
+                        </li>';
+                            }
+                          ?>
                       </ul>
                     </div>
                   </div>
@@ -83,7 +119,7 @@
               <div class="row align-items-center">
                 <div class="col-xl-12">
                   <div class="logo2">
-                    <a href="index.html"
+                    <a href="index.php"
                       ><img src="Images/logo.png" alt="BookBridge"
                     /></a>
                   </div>
@@ -91,7 +127,7 @@
                   <div class="main-menu text-center d-none d-lg-block">
                     <nav>
                       <ul id="navigation">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.php">Home</a></li>
                         <li>
                           <a href="#">Categories</a>
                           <ul class="submenu">

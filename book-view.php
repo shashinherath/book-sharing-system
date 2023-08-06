@@ -1,5 +1,18 @@
 <?php
-session_start();
+    session_start();
+
+    include('database.php');
+
+    $isbn = isset($_GET['isbn']) ? $_GET['isbn'] : null;
+
+    if (isset($isbn)) {
+        $query = "SELECT * FROM books where isbn = '$isbn'";
+        $result = mysqli_query($con, $query);
+        if (!$result) {
+            die("Error: " . mysqli_error($con));
+        }
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +75,7 @@ session_start();
                     <div class="header-info-right d-flex align-items-center">
                       <ul>
                         <li>
-                          <a href="register.html" class="btn header-btn"
+                          <a href="register.php" class="btn header-btn"
                             >Register</a
                           >
                           <a href="login.php" class="btn header-btn">Login</a>
@@ -139,34 +152,37 @@ session_start();
                 <div class="col-xl-12">
                   <div class="single-services d-flex align-items-center mb-0">
                       <?php
-
+                      if (isset($result)) {
+                          $row = mysqli_fetch_assoc($result);
+                      } else {
+                          $row['book_name'] = 'Sri Lanka at the Crossroads of History';
+                          $row['price'] = '1500.00';
+                          $row['description'] = 'The peoples of Sri Lanka have participated in far-flung trading networks, religious formations, and Asian and European empires for millennia. This interdisciplinary volume sets out to draw Sri Lanka into the field of Asian and Global History by showing how the latest wave of scholarship has explored the island as a ‘crossroads’, a place defined by its openness to movement across the Indian Ocean.Experts in the history, archaeology, literature and art of the island from c.500 BCE to c.1850 CE use Lankan material to explore a number of pressing scholarly debates. They address these matters from their varied disciplinary perspectives and diverse array of sources, critically assessing concepts such as ethnicity, cosmopolitanism and localisation, and elucidating the subtle ways in which the ...';
+                      }
                       echo '
                     <div class="features-img">
                       <img src="assets/img/gallery/best-books1.jpg" alt="" />
                     </div>
                     <div class="features-caption">
-                      <h3>' . $_SESSION['title'] . '</h3>
+                      <h3>'.$row['book_name'].'</h3>
                       <p>By Evan Winter</p>
                       <div class="price">
-                        <span>$' . $_SESSION['price'] . '</span>
+                        <span>Rs. '.$row['price']. '</span>
                       </div>
                       <div class="review">
                         <div class="rating">
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star-half-alt"></i>
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-half"></i>
                         </div>
                         <p>(120 Review)</p>
                       </div>
                       <a href="#" class="white-btn mr-10">Add to Cart</a>
-                      <a href="#" class="border-btn share-btn"
-                        ><i class="fas fa-share-alt"></i
-                      ></a>
                     </div>
-                    '
-                      ?>
+                    
+
                   </div>
                 </div>
               </div>
@@ -183,7 +199,7 @@ session_start();
                 <nav>
                   <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <a
-                      class="nav-link"
+                      class="nav-link active"
                       id="nav-one-tab"
                       data-bs-toggle="tab"
                       href="#nav-one"
@@ -213,7 +229,7 @@ session_start();
                       >Comments</a
                     >
                     <a
-                      class="nav-link active"
+                      class="nav-link"
                       id="nav-four-tab"
                       data-bs-toggle="tab"
                       href="#nav-four"
@@ -231,7 +247,7 @@ session_start();
         <div class="container">
           <div class="tab-content" id="nav-tabContent">
             <div
-              class="tab-pane fade"
+              class="tab-pane fade active show"
               id="nav-one"
               role="tabpanel"
               aria-labelledby="nav-one-tab"
@@ -239,24 +255,7 @@ session_start();
               <div class="row">
                 <div class="offset-xl-1 col-lg-9">
                   <p>
-                    Beryl Cook is one of Britain’s most talented and amusing
-                    artists .Beryl’s pictures feature women of all shapes and
-                    sizes enjoying themselves .Born between the two world wars,
-                    Beryl Cook eventually left Kendrick School in Reading at the
-                    age of 15, where she went to secretarial school and then
-                    into an insurance office. After moving to London and then
-                    Hampton, she eventually married her next door neighbour from
-                    Reading, John Cook. He was an officer in the Merchant Navy
-                    and after he left the sea in 1956, they bought a pub for a
-                    year before John took a job in Southern Rhodesia with a
-                    motor company. Beryl bought their young son a box of
-                    watercolours, and when showing him how to use it, she
-                    decided that she herself quite enjoyed painting. John
-                    subsequently bought her a child’s painting set for her
-                    birthday and it was with this that she produced her first
-                    significant work, a half-length portrait of a dark-skinned
-                    lady with a vacant expression and large drooping breasts. It
-                    was aptly named ‘Hangover’ by Beryl’s husband and
+                    ' .$row['description'].'
                   </p>
                   <p>
                     It is often frustrating to attempt to plan meals that are
@@ -357,7 +356,7 @@ session_start();
               </div>
             </div>
             <div
-              class="tab-pane fade active show"
+              class="tab-pane fade"
               id="nav-four"
               role="tabpanel"
               aria-labelledby="nav-four-tab"
@@ -442,7 +441,8 @@ session_start();
             </div>
           </div>
         </div>
-      </section>
+      </section>'
+      ?>
     </main>
 
     <!-- Footer -->

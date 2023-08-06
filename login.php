@@ -17,6 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $user_data = mysqli_fetch_assoc($result);
                 if ($user_data['password'] == $password) {
                     header("location:index.php");
+                    $_SESSION['login'] = true;
+                    $_SESSION['email'] = $email;
                     die;
                 }
             }
@@ -90,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="header-info-right d-flex align-items-center">
                       <ul>
                         <li>
-                          <a href="register.html" class="btn header-btn"
+                          <a href="register.php" class="btn header-btn"
                             >Register</a
                           >
                           <a href="login.html" class="btn header-btn">Login</a>
@@ -184,7 +186,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
           <div class="login-footer">
             <p>
-              Don’t have an account? <a href="register.html">Sign Up</a> here
+              Don’t have an account? <a href="register.php">Sign Up</a> here
             </p>
             <button class="submit-btn3">Login</button>
           </div>
