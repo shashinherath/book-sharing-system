@@ -537,7 +537,7 @@
                   Cardiac and Critical Care Complex at Lady Ridgeway Children's
                   Hospital.
                 </p>
-                <a href="#" class="btn btn-primary">Donate</a>
+                <a href="organization_details.php" class="btn btn-primary">View</a>
               </div>
             </div>
             <div class="card" style="width: 18rem">
@@ -553,7 +553,7 @@
                   to transforming the lives of children struggling with mental
                   health and learning disorders.
                 </p>
-                <a href="#" class="btn btn-primary">Donate</a>
+                <a href="#" class="btn btn-primary">View</a>
               </div>
             </div>
             <div class="card" style="width: 18rem">
@@ -570,7 +570,7 @@
                   preventable preterm birth and infant death and closing the
                   health equity gap for all families.
                 </p>
-                <a href="#" class="btn btn-primary">Donate</a>
+                <a href="#" class="btn btn-primary">View</a>
               </div>
             </div>
             <div class="card" style="width: 18rem">
@@ -588,7 +588,7 @@
                   discrimination, exploitation to ensure the wellbeing, value
                   and equality of a child.
                 </p>
-                <a href="#" class="btn btn-primary">Donate</a>
+                <a href="#" class="btn btn-primary">View</a>
               </div>
             </div>
           </div>
