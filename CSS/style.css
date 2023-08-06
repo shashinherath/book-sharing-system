@@ -203,6 +203,11 @@
   background-image: url(https://images.unsplash.com/photo-1521587760476-6c12a4b040da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80);
 }
 
+.slider-bg12 {
+  background-image: url(/Images/Org_Head/Little_hearts.png);
+}
+
+
 .guide1 {
   margin: 20px 150px;
 }
