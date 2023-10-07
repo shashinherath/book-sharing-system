@@ -1,3 +1,39 @@
+<?php
+    session_start();
+
+    include('database.php');
+
+    $_SESSION['cartcnt'] = (isset($_SESSION['cartcnt'])) ? $_SESSION['cartcnt'] : 0;
+
+    if (isset($_SESSION['email'])) {
+        $email = $_SESSION['email'];
+        $queryuser = "SELECT * FROM user where email = '$email' ";
+        $resultuser = mysqli_query($con, $queryuser);
+
+        if (!$resultuser) {
+            die("Error: " . mysqli_error($con));
+        }
+    }
+
+    if (isset($email)) {
+        $querycart = "SELECT * FROM cart where email = '$email'";
+        $resultcart = mysqli_query($con, $querycart);
+        if (!$resultcart) {
+            die("Error: " . mysqli_error($con));
+        }
+    }
+
+    if (isset($email)) {
+        $queryorg = "SELECT * FROM organizations";
+        $resultorg = mysqli_query($con, $queryorg);
+        if (!$resultorg) {
+            die("Error: " . mysqli_error($con));
+        }
+    }
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -56,14 +92,33 @@
                       </form>
                     </div>
                     <div class="header-info-right d-flex align-items-center">
-                      <ul>
-                        <li>
+                        <ul>
+                            <?php
+                            if (isset($resultuser)) {
+                                $rowuser = mysqli_fetch_assoc($resultuser);
+                            }
+
+                            if (isset($_SESSION['login'])) {
+                                echo '<li class="headericonlist">
+                          <a href="cart.php" class="headericon"
+                            ><i class="bi bi-cart"></i><br />
+                            <span id="cartcount">'.$_SESSION['cartcnt'].'</span></a
+                          >
+                          <a href="profile.php" class="headericon"
+                            ><i class="bi bi-person-circle"></i><br />
+                            <span>'. $rowuser['name'] .'</span>
+                          </a>';
+                            }
+                            else {
+                                echo '<li>
                           <a href="register.php" class="btn header-btn"
                             >Register</a
                           >
                           <a href="login.php" class="btn header-btn">Login</a>
-                        </li>
-                      </ul>
+                        </li>';
+                            }
+                            ?>
+                        </ul>
                     </div>
                   </div>
                 </div>
@@ -141,22 +196,35 @@
                   </tr>
                 </thead>
                 <tbody>
+                <?php
+                    while ($rowcart = mysqli_fetch_assoc($resultcart)) {
+
+                        $isbncart = $rowcart['isbn'];
+                        $queryitem = "SELECT * FROM books where isbn = '$isbncart'";
+                        $resultitem = mysqli_query($con, $queryitem);
+                        if (!$resultitem) {
+                            die("Error: " . mysqli_error($con));
+                        }
+
+                        $rowitem = mysqli_fetch_assoc($resultitem);
+
+                        echo '
                   <tr>
                     <td>
                       <div class="media">
                         <div class="d-flex">
                           <img
-                            src="assets/img/gallery/best-books1.jpg"
+                            src="' . $rowitem['image'] . '"
                             alt=""
                           />
                         </div>
                         <div class="media-body">
-                          <p>Minimalistic shop for multipurpose use</p>
+                          <p>' . $rowitem['book_name'] . '</p>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <h5>$360.00</h5>
+                      <h5>' . $rowitem['price'] . '</h5>
                     </td>
                     <td>
                       <div class="product_count">
@@ -166,7 +234,7 @@
                         <input
                           class="input-number"
                           type="text"
-                          value="1"
+                          value="if"
                           min="0"
                           max="10"
                         />
@@ -178,57 +246,9 @@
                     <td>
                       <h5>$720.00</h5>
                     </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="media">
-                        <div class="d-flex">
-                          <img
-                            src="assets/img/gallery/best_selling1.jpg"
-                            alt=""
-                          />
-                        </div>
-                        <div class="media-body">
-                          <p>Minimalistic shop for multipurpose use</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <h5>$360.00</h5>
-                    </td>
-                    <td>
-                      <div class="product_count">
-                        <span class="input-number-decrement">
-                          <i class="bi bi-caret-down-fill"></i
-                        ></span>
-                        <input
-                          class="input-number2"
-                          type="text"
-                          value="1"
-                          min="0"
-                          max="10"
-                        />
-                        <span class="input-number-increment">
-                          <i class="bi bi-caret-up-fill"></i
-                        ></span>
-                      </div>
-                    </td>
-                    <td>
-                      <h5>$720.00</h5>
-                    </td>
-                  </tr>
-                  <tr class="bottom_button">
-                    <td>
-                      <a class="btn" href="#">Update Cart</a>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <div class="cupon_text float-right">
-                        <a class="btn" href="#">Close Coupon</a>
-                      </div>
-                    </td>
-                  </tr>
+                  </tr>';
+                    }
+                  ?>
                   <tr>
                     <td></td>
                     <td></td>
@@ -243,99 +263,41 @@
                     <td></td>
                     <td></td>
                     <td>
-                      <h5>Shipping</h5>
+                      <h5>Organization</h5>
                     </td>
                     <td>
                       <div class="shipping_box">
-                        <ul class="list">
-                          <li>
-                            Flat Rate: $5.00
-                            <input
-                              type="radio"
-                              aria-label="Radio button for following text input"
-                            />
-                          </li>
-                          <li>
-                            Free Shipping
-                            <input
-                              type="radio"
-                              aria-label="Radio button for following text input"
-                            />
-                          </li>
-                          <li>
-                            Flat Rate: $10.00
-                            <input
-                              type="radio"
-                              aria-label="Radio button for following text input"
-                            />
-                          </li>
-                          <li class="active">
-                            Local Delivery: $2.00
-                            <input
-                              type="radio"
-                              aria-label="Radio button for following text input"
-                            />
-                          </li>
-                        </ul>
+
                         <h6>
-                          Calculate Shipping
+                          Select for donation
                           <i class="fa fa-caret-down" aria-hidden="true"></i>
                         </h6>
-                        <select class="shipping_select" style="display: none">
-                          <option value="1">Bangladesh</option>
-                          <option value="2">India</option>
-                          <option value="4">Pakistan</option>
-                        </select>
-                        <div class="nice-select shipping_select" tabindex="0">
-                          <span class="current">Bangladesh</span>
-                          <ul class="list">
-                            <li data-value="1" class="option selected">
-                              Bangladesh
-                            </li>
-                            <li data-value="2" class="option">India</li>
-                            <li data-value="4" class="option">Pakistan</li>
-                          </ul>
-                        </div>
                         <select
                           class="shipping_select section_bg"
                           style="display: none"
                         >
-                          <option value="1">Select a State</option>
-                          <option value="2">Select a State</option>
-                          <option value="4">Select a State</option>
+                       
+                            <?php
+                            while ($roworg = mysqli_fetch_assoc($resultorg)) {
+
+
+                                echo '
+                          <option value="'.$roworg['org_id'].'">'.$roworg['org_name'].'</option>';
+                            }
+                            ?>
                         </select>
-                        <div
-                          class="nice-select shipping_select section_bg"
-                          tabindex="0"
-                        >
-                          <span class="current">Select a State</span>
-                          <ul class="list">
-                            <li data-value="1" class="option selected">
-                              Select a State
-                            </li>
-                            <li data-value="2" class="option">
-                              Select a State
-                            </li>
-                            <li data-value="4" class="option">
-                              Select a State
-                            </li>
-                          </ul>
-                        </div>
+                       
                         <input
                           class="post_code"
                           type="text"
-                          placeholder="Postcode/Zipcode"
+                          placeholder="Special Message"
                         />
-                        <a class="btn" href="#">Update Details</a>
+                        <a class="btn" href="#">Proceed to checkout</a>
                       </div>
                     </td>
                   </tr>
                 </tbody>
               </table>
-              <div class="checkout_btn_inner float-right">
-                <a class="btn" href="#">Continue Shopping</a>
-                <a class="btn checkout_btn" href="#">Proceed to checkout</a>
-              </div>
             </div>
           </div>
         </div>

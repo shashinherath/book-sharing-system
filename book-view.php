@@ -1,9 +1,9 @@
 <?php
     session_start();
 
-    $_SESSION['cartcnt'] = (isset($_SESSION['cartcnt'])) ? $_SESSION['cartcnt'] : 0;
-
     include('database.php');
+
+    $_SESSION['cartcnt'] = (isset($_SESSION['cartcnt'])) ? $_SESSION['cartcnt'] : 0;
 
     $isbn = isset($_GET['isbn']) ? $_GET['isbn'] : null;
 
@@ -21,6 +21,18 @@
         $query = "SELECT * FROM books where isbn = '$isbn'";
         $result = mysqli_query($con, $query);
         if (!$result) {
+            die("Error: " . mysqli_error($con));
+        }
+    }
+
+    if (isset($_GET['add'])) {
+        $_SESSION['cartcnt'] = $_SESSION['cartcnt'] + 1;
+
+        $queryadd = "INSERT INTO cart (email, isbn) VALUES ('$email', '$isbn')";
+
+        $resultadd = mysqli_query($con, $queryadd);
+
+        if (!$resultadd) {
             die("Error: " . mysqli_error($con));
         }
     }
@@ -90,8 +102,6 @@
                           if (isset($resultuser)) {
                               $rowuser = mysqli_fetch_assoc($resultuser);
                           }
-
-                          $_SESSION['cartcnt'] = $_COOKIE['jscartcount'];
 
                           if (isset($_SESSION['login'])) {
                               echo '<li class="headericonlist">
@@ -199,7 +209,7 @@
                     </div>
                     <div class="features-caption">
                       <h3>'.$row['book_name'].'</h3>
-                      <p>By Evan Winter</p>
+                      <p>'.$row['author'].'</p>
                       <div class="price">
                         <span>Rs. '.$row['price']. '</span>
                       </div>
@@ -213,7 +223,7 @@
                         </div>
                         <p>(137 Review)</p>
                       </div>
-                      <a href="#" onclick="cartadd()" class="white-btn mr-10" >Add to Cart</a>
+                      <a href="?isbn='.$isbn.'&add" class="white-btn mr-10" >Add to Cart</a>
                     </div>
                     
 

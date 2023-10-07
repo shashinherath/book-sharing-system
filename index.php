@@ -1,6 +1,8 @@
 <?php
     session_start();
 
+    $_SESSION['cartcnt'] = (isset($_SESSION['cartcnt'])) ? $_SESSION['cartcnt'] : 0;
+
     include('database.php');
 
     if (isset($_SESSION['email'])) {
@@ -91,7 +93,7 @@
                                 echo '<li class="headericonlist">
                           <a href="cart.php" class="headericon"
                             ><i class="bi bi-cart"></i><br />
-                            <span class="cardcount">0</span></a
+                            <span class="cardcount">'.$_SESSION['cartcnt'].'</span></a
                           >
                           <a href="profile.php" class="headericon"
                             ><i class="bi bi-person-circle"></i><br />

@@ -1,7 +1,19 @@
 <?php
     session_start();
 
+    $_SESSION['cartcnt'] = (isset($_SESSION['cartcnt'])) ? $_SESSION['cartcnt'] : 0;
+
     include('database.php');
+
+    if (isset($_SESSION['email'])) {
+        $email = $_SESSION['email'];
+        $queryuser = "SELECT * FROM user where email = '$email' ";
+        $resultuser = mysqli_query($con, $queryuser);
+
+        if (!$resultuser) {
+            die("Error: " . mysqli_error($con));
+        }
+    }
 
     $query = "SELECT * FROM books";
     $result = mysqli_query($con, $query);
@@ -69,12 +81,31 @@
                     </div>
                     <div class="header-info-right d-flex align-items-center">
                       <ul>
-                        <li>
+                          <?php
+                          if (isset($resultuser)) {
+                              $rowuser = mysqli_fetch_assoc($resultuser);
+                          }
+
+                          if (isset($_SESSION['login'])) {
+                              echo '<li class="headericonlist">
+                          <a href="cart.php" class="headericon"
+                            ><i class="bi bi-cart"></i><br />
+                            <span id="cartcount">'.$_SESSION['cartcnt'].'</span></a
+                          >
+                          <a href="profile.php" class="headericon"
+                            ><i class="bi bi-person-circle"></i><br />
+                            <span>'. $rowuser['name'] .'</span>
+                          </a>';
+                          }
+                          else {
+                              echo '<li>
                           <a href="register.php" class="btn header-btn"
                             >Register</a
                           >
                           <a href="login.php" class="btn header-btn">Login</a>
-                        </li>
+                        </li>';
+                          }
+                          ?>
                       </ul>
                     </div>
                   </div>
@@ -396,7 +427,7 @@
                         </div>
                         <div class="properties-caption properties-caption2">
                           <h3><a href="book-view.php?isbn='.$row['isbn'].'">' . $row['book_name']. '</a></h3>
-                          <p>J. R Rain</p>
+                          <p>'.$row['author'].'</p>
                           <div
                             class="properties-footer justify-content-between align-items-center"
                           >
