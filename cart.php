@@ -292,7 +292,7 @@
                           type="text"
                           placeholder="Special Message"
                         />
-                        <a class="btn" href="#">Proceed to checkout</a>
+                        <a class="btn" href="checkout.php">Proceed to checkout</a>
                       </div>
                     </td>
                   </tr>
