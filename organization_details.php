@@ -1,3 +1,32 @@
+<?php
+    session_start();
+
+    $_SESSION['cartcnt'] = (isset($_SESSION['cartcnt'])) ? $_SESSION['cartcnt'] : 0;
+
+    include('database.php');
+
+    if (isset($_SESSION['email'])) {
+        $email = $_SESSION['email'];
+        $query = "SELECT * FROM user where email = '$email' ";
+        $result = mysqli_query($con, $query);
+
+        if (!$result) {
+            die("Error: " . mysqli_error($con));
+        }
+    }
+
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+
+        $queryorg = "SELECT * FROM organizations WHERE org_id = '$id'";
+        $resultorg = mysqli_query($con, $queryorg);
+
+        if (!$resultorg) {
+            die("Error: " . mysqli_error($con));
+        }
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,12 +76,33 @@
                     </form>
                   </div>
                   <div class="header-info-right d-flex align-items-center">
-                    <ul>
-                      <li>
-                        <a href="register.php" class="btn header-btn">Register</a>
-                        <a href="login.php" class="btn header-btn">Login</a>
-                      </li>
-                    </ul>
+                      <ul>
+                          <?php
+                          if (isset($result)) {
+                              $row = mysqli_fetch_assoc($result);
+                          }
+
+                          if (isset($_SESSION['login'])) {
+                              echo '<li class="headericonlist">
+                          <a href="cart.php" class="headericon"
+                            ><i class="bi bi-cart"></i><br />
+                            <span class="cardcount">'.$_SESSION['cartcnt'].'</span></a
+                          >
+                          <a href="profile.php" class="headericon"
+                            ><i class="bi bi-person-circle"></i><br />
+                            <span>'. $row['name'] .'</span>
+                          </a>';
+                          }
+                          else {
+                              echo '<li>
+                          <a href="register.php" class="btn header-btn"
+                            >Register</a
+                          >
+                          <a href="login.php" class="btn header-btn">Login</a>
+                        </li>';
+                          }
+                          ?>
+                      </ul>
                   </div>
                 </div>
               </div>
@@ -82,7 +132,7 @@
                           </li>
                           <li><a href="Stories.php">Success Stories</a></li>
                           <li>
-                            <a href="resources.html">Educational Resources</a>
+                            <a href="resources.php">Educational Resources</a>
                           </li>
                           <li>
                             <a href="forums.php">Community Forums</a>
@@ -97,58 +147,11 @@
                 </div>
               </div>
 
-              <div class="col-xl-12">
-                <div class="mobile_menu d-block d-lg-none">
-                  <div class="slicknav_menu">
-                    <a href="#" aria-haspopup="true" role="button" tabindex="0" class="slicknav_btn slicknav_collapsed"
-                      style="outline: none"><span class="slicknav_menutxt">MENU</span><span class="slicknav_icon"><span
-                          class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span><span
-                          class="slicknav_icon-bar"></span></span></a>
-                    <ul class="slicknav_nav slicknav_hidden" aria-hidden="true" role="menu" style="display: none">
-                      <li>
-                        <a href="index.php" role="menuitem" tabindex="-1">Home</a>
-                      </li>
-                      <li>
-                        <a href="categories.html" role="menuitem" tabindex="-1">Categories</a>
-                      </li>
-                      <li>
-                        <a href="about.php" role="menuitem" tabindex="-1">About</a>
-                      </li>
-                      <li class="slicknav_collapsed slicknav_parent">
-                        <a href="#" role="menuitem" aria-haspopup="true" tabindex="-1"
-                          class="slicknav_item slicknav_row" style="outline: none"><a href="#" tabindex="-1">Pages</a>
-                          <span class="slicknav_arrow">+</span></a>
-                        <ul class="submenu slicknav_hidden" role="menu" aria-hidden="true" style="display: none">
-                          <li>
-                            <a href="login.php" role="menuitem" tabindex="-1">login</a>
-                          </li>
-                          <li>
-                            <a href="cart.php" role="menuitem" tabindex="-1">Cart</a>
-                          </li>
-                          <li>
-                            <a href="checkout.php" role="menuitem" tabindex="-1">Checkout</a>
-                          </li>
-                          <li>
-                            <a href="book-details.html" role="menuitem" tabindex="-1">book Details</a>
-                          </li>
-                          <li>
-                            <a href="blog_details.html" role="menuitem" tabindex="-1">Blog Details</a>
-                          </li>
-                          <li>
-                            <a href="elements.html" role="menuitem" tabindex="-1">Element</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li>
-                        <a href="blog.html" role="menuitem" tabindex="-1">Blog</a>
-                      </li>
-                      <li>
-                        <a href="contact.php" role="menuitem" tabindex="-1">Contect</a>
-                      </li>
-                    </ul>
-                  </div>
+                <div class="col-xl-12">
+                    <div class="mobile_menu d-block d-lg-none">
+                        <div class="slicknav_menu"></div>
+                    </div>
                 </div>
-              </div>
             </div>
           </div>
         </div>
