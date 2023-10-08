@@ -1,3 +1,22 @@
+<?php
+session_start();
+
+$_SESSION['cartcnt'] = (isset($_SESSION['cartcnt'])) ? $_SESSION['cartcnt'] : 0;
+
+include('database.php');
+
+if (isset($_SESSION['email'])) {
+    $email = $_SESSION['email'];
+    $query = "SELECT * FROM user where email = '$email' ";
+    $result = mysqli_query($con, $query);
+
+    if (!$result) {
+        die("Error: " . mysqli_error($con));
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -56,14 +75,33 @@
                       </form>
                     </div>
                     <div class="header-info-right d-flex align-items-center">
-                      <ul>
-                        <li>
+                        <ul>
+                            <?php
+                            if (isset($result)) {
+                                $row = mysqli_fetch_assoc($result);
+                            }
+
+                            if (isset($_SESSION['login'])) {
+                                echo '<li class="headericonlist">
+                          <a href="cart.php" class="headericon"
+                            ><i class="bi bi-cart"></i><br />
+                            <span class="cardcount">'.$_SESSION['cartcnt'].'</span></a
+                          >
+                          <a href="profile.php" class="headericon"
+                            ><i class="bi bi-person-circle"></i><br />
+                            <span>'. $row['name'] .'</span>
+                          </a>';
+                            }
+                            else {
+                                echo '<li>
                           <a href="register.php" class="btn header-btn"
                             >Register</a
                           >
                           <a href="login.php" class="btn header-btn">Login</a>
-                        </li>
-                      </ul>
+                        </li>';
+                            }
+                            ?>
+                        </ul>
                     </div>
                   </div>
                 </div>
@@ -91,7 +129,7 @@
                               <a href="guidline.php">Donation Guidelines</a>
                             </li>
                             <li>
-                              <a href="organizations.html">Recipient Organizations</a>
+                              <a href="organizations.php">Recipient Organizations</a>
                             </li>
                             <li><a href="Stories.php">Success Stories</a></li>
                             <li>
@@ -253,8 +291,7 @@
         </div>
       </div>
 
-      
-    </div>
+
     </main>
 
 
@@ -266,143 +303,31 @@
     
     <div class="container">
       <div class="row justify-content-center">
-        <div class="card" style="width: 18rem">
-          <img
-            class="card-img-top"
-            src="assets\img\Foundations\LittleHearts.png"
-            alt="Card image cap"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Little Hearts</h5>
-            <p class="card-text">
-              Little Hearts is a national fundraising project to build a
-              Cardiac and Critical Care Complex at Lady Ridgeway Children's
-              Hospital.
-            </p>
-            <a href="#" class="btn btn-primary">Donate</a>
-          </div>
-        </div>
-        <div class="card" style="width: 18rem">
-          <img
-            class="card-img-top"
-            src="assets\img\Foundations\CMI.png"
-            alt="Card image cap"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Child Mind Institute</h5>
-            <p class="card-text">
-              The Child Mind Institute is an independent nonprofit dedicated
-              to transforming the lives of children struggling with mental
-              health and learning disorders.
-            </p>
-            <a href="#" class="btn btn-primary">Donate</a>
-          </div>
-        </div>
-        <div class="card" style="width: 18rem">
-          <img
-            class="card-img-top"
-            src="assets\img\Foundations\MOD.png"
-            alt="Card image cap"
-          />
-          <div class="card-body">
-            <h5 class="card-title">March of Dimes</h5>
-            <p class="card-text">
-              March of Dimes is a nonprofit organization committed to ending
-              preventable maternal health risks and death, ending
-              preventable preterm birth and infant death and closing the
-              health equity gap for all families.
-            </p>
-            <a href="#" class="btn btn-primary">Donate</a>
-          </div>
-        </div>
-        <div class="card" style="width: 18rem">
-          <img
-            class="card-img-top"
-            src="assets\img\Foundations\PIP.png"
-            alt="Card image cap"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Pretty In Pink</h5>
-            <p class="card-text">
-              Pretty In Pink Foundation serves North Carolinians diagnosed
-              with breast cancer who are under-insured or uninsured. When
-              breast cancer is present and medical insurance is not enough,
-              care can be delayed or simply not ever received because of
-              cost barriers.
-            </p>
-            <a href="#" class="btn btn-primary">Donate</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
+      <?php
+        $queryorg = "SELECT * FROM organizations";
+        $resultorg = mysqli_query($con, $queryorg);
 
-  <div class="orgcard">
-    
-    
-    <div class="container">
-      <div class="row justify-content-center">
+        while ($roworg = mysqli_fetch_assoc($resultorg)) {
+
+            echo '  
         <div class="card" style="width: 18rem">
           <img
             class="card-img-top"
-            src="assets\img\Foundations\SLCF.png"
+            src="'.$roworg['image'].'"
             alt="Card image cap"
           />
           <div class="card-body">
-            <h5 class="card-title">SLCF</h5>
+            <h5 class="card-title">'.$roworg['org_name'].'</h5>
             <p class="card-text">
-              We are the Sri Lankan Children Foundation. We bring education to the illiterate children, whose families cannot 
-              afford to go to schools and give opportunities to study further 
-              so that they can obtain their dreams.
+              '.$roworg['description'].'
             </p>
-            <a href="#" class="btn btn-primary">Donate</a>
+            <a href="#" class="btn btn-primary">View</a>
           </div>
-        </div>
-        <div class="card" style="width: 18rem">
-          <img
-            class="card-img-top"
-            src="assets\img\Foundations\CAL.png"
-            alt="Card image cap"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Child Action Lanka</h5>
-            <p class="card-text">
-              The holistic approach that CAL models, aims to provide transformational development that is sustainable. We go beyond the 
-              surface into underlying root causes of inequality, discrimination, exploitation to ensure the wellbeing, value and equality of a child.
-            </p>
-            <a href="#" class="btn btn-primary">Donate</a>
-          </div>
-        </div>
-        <div class="card" style="width: 18rem">
-          <img
-            class="card-img-top"
-            src="assets\img\Foundations\SCV.png"
-            alt="Card image cap"
-          />
-          <div class="card-body">
-            <h5 class="card-title">SOS Children's Villages SL</h5>
-            <p class="card-text">
-              We work to keep families together, provide alternative care when needed, support young people on their path to independence, 
-              and advocate for the rights of children. Together with donors, partners, communities and governments, we lay the foundations for a brighter future.
-            </p>
-            <a href="#" class="btn btn-primary">Donate</a>
-          </div>
-        </div>
-        <div class="card" style="width: 18rem">
-          <img
-            class="card-img-top"
-            src="assets\img\Foundations\UNICEF.png"
-            alt="Card image cap"
-          />
-          <div class="card-body">
-            <h5 class="card-title">UNICEF</h5>
-            <p class="card-text">
-              UNICEF works to protect the rights of every child in Sri Lanka. Our goal is to ensure that all of our children survive, thrive and fulfill their vast potential.
-            </p>
-            <a href="#" class="btn btn-primary">Donate</a>
-          </div>
-        </div>
+        </div>';
+        }
+        ?>
+          
       </div>
     </div>
   </div>
