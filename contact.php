@@ -1,3 +1,22 @@
+<?php
+session_start();
+
+$_SESSION['cartcnt'] = (isset($_SESSION['cartcnt'])) ? $_SESSION['cartcnt'] : 0;
+
+include('database.php');
+
+if (isset($_SESSION['email'])) {
+    $email = $_SESSION['email'];
+    $query = "SELECT * FROM user where email = '$email' ";
+    $result = mysqli_query($con, $query);
+
+    if (!$result) {
+        die("Error: " . mysqli_error($con));
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -57,14 +76,33 @@
                       </form>
                     </div>
                     <div class="header-info-right d-flex align-items-center">
-                      <ul>
-                        <li>
+                        <ul>
+                            <?php
+                            if (isset($result)) {
+                                $row = mysqli_fetch_assoc($result);
+                            }
+
+                            if (isset($_SESSION['login'])) {
+                                echo '<li class="headericonlist">
+                          <a href="cart.php" class="headericon"
+                            ><i class="bi bi-cart"></i><br />
+                            <span class="cardcount">'.$_SESSION['cartcnt'].'</span></a
+                          >
+                          <a href="profile.php" class="headericon"
+                            ><i class="bi bi-person-circle"></i><br />
+                            <span>'. $row['name'] .'</span>
+                          </a>';
+                            }
+                            else {
+                                echo '<li>
                           <a href="register.php" class="btn header-btn"
                             >Register</a
                           >
                           <a href="login.php" class="btn header-btn">Login</a>
-                        </li>
-                      </ul>
+                        </li>';
+                            }
+                            ?>
+                        </ul>
                     </div>
                   </div>
                 </div>
