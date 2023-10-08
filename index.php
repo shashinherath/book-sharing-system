@@ -15,6 +15,9 @@
         }
     }
 
+    $querybook = "SELECT * FROM books LIMIT 7";
+    $resultbook = mysqli_query($con, $querybook);
+
 ?>
 
 <!DOCTYPE html>
@@ -296,78 +299,21 @@
           <div class="row">
             <div class="col-xl-12">
               <div class="selling-active">
-                <div class="properties pb-20">
-                  <div class="properties-card">
-                    <div class="properties-img">
-                      <a href="book-details.html"
-                        ><img src="assets/img/gallery/best_selling1.jpg" alt=""
-                      /></a>
-                    </div>
-                    <div class="properties-caption">
-                      <h3><a href="book-details.html">Moon Dance</a></h3>
-                      <p>J. R Rain</p>
-                      <div
-                        class="properties-footer d-flex justify-content-between align-items-center"
-                      >
-                        <div class="review">
-                          <div class="rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-half"></i>
-                          </div>
-                          <p>(<span>120</span> Review)</p>
-                        </div>
-                        <div class="price">
-                          <span>$50</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  <?php
 
-                <div class="properties pb-20">
-                  <div class="properties-card">
-                    <div class="properties-img">
-                      <a href="book-details.html"
-                        ><img src="assets/img/gallery/best_selling2.jpg" alt=""
-                      /></a>
-                    </div>
-                    <div class="properties-caption">
-                      <h3><a href="book-details.html">Moon Dance</a></h3>
-                      <p>J. R Rain</p>
-                      <div
-                        class="properties-footer d-flex justify-content-between align-items-center"
-                      >
-                        <div class="review">
-                          <div class="rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-half"></i>
-                          </div>
-                          <p>(<span>120</span> Review)</p>
-                        </div>
-                        <div class="price">
-                          <span>$50</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  while ($rowbook = mysqli_fetch_assoc($resultbook)) {
 
-                <div class="properties pb-20">
+                      echo '
+                  <div class="properties pb-20">
                   <div class="properties-card">
                     <div class="properties-img">
-                      <a href="book-details.html"
-                        ><img src="assets/img/gallery/best_selling3.jpg" alt=""
+                      <a href="book-view.php?isbn='.$rowbook['isbn'].'"
+                        ><img src="'.$rowbook['image'].'" alt="'.$rowbook['book_name'].'" height="280px"
                       /></a>
                     </div>
-                    <div class="properties-caption">
-                      <h3><a href="book-details.html">Moon Dance</a></h3>
-                      <p>J. R Rain</p>
+                    <div class="properties-caption" style="height: 280px;">
+                      <h3><a href="book-view.php?isbn='.$rowbook['isbn'].'">'.$rowbook['book_name'].'</a></h3>
+                      <p>'.$rowbook['author'].'</p>
                       <div
                         class="properties-footer d-flex justify-content-between align-items-center"
                       >
@@ -379,139 +325,18 @@
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-half"></i>
                           </div>
-                          <p>(<span>120</span> Review)</p>
+                          <p>(<span>137</span> Review)</p>
                         </div>
                         <div class="price">
-                          <span>$50</span>
+                          <span>Rs.'.$rowbook['price'].'</span>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                </div>';
+                  }
+                ?>
 
-                <div class="properties pb-20">
-                  <div class="properties-card">
-                    <div class="properties-img">
-                      <a href="book-details.html"
-                        ><img src="assets/img/gallery/best_selling4.jpg" alt=""
-                      /></a>
-                    </div>
-                    <div class="properties-caption">
-                      <h3><a href="book-details.html">Moon Dance</a></h3>
-                      <p>J. R Rain</p>
-                      <div
-                        class="properties-footer d-flex justify-content-between align-items-center"
-                      >
-                        <div class="review">
-                          <div class="rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-half"></i>
-                          </div>
-                          <p>(<span>120</span> Review)</p>
-                        </div>
-                        <div class="price">
-                          <span>$50</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="properties pb-20">
-                  <div class="properties-card">
-                    <div class="properties-img">
-                      <a href="book-details.html"
-                        ><img src="assets/img/gallery/best_selling5.jpg" alt=""
-                      /></a>
-                    </div>
-                    <div class="properties-caption">
-                      <h3><a href="book-details.html">Moon Dance</a></h3>
-                      <p>J. R Rain</p>
-                      <div
-                        class="properties-footer d-flex justify-content-between align-items-center"
-                      >
-                        <div class="review">
-                          <div class="rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-half"></i>
-                          </div>
-                          <p>(<span>120</span> Review)</p>
-                        </div>
-                        <div class="price">
-                          <span>$50</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="properties pb-20">
-                  <div class="properties-card">
-                    <div class="properties-img">
-                      <a href="book-details.html"
-                        ><img src="assets/img/gallery/best_selling6.jpg" alt=""
-                      /></a>
-                    </div>
-                    <div class="properties-caption">
-                      <h3><a href="book-details.html">Moon Dance</a></h3>
-                      <p>J. R Rain</p>
-                      <div
-                        class="properties-footer d-flex justify-content-between align-items-center"
-                      >
-                        <div class="review">
-                          <div class="rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-half"></i>
-                          </div>
-                          <p>(<span>120</span> Review)</p>
-                        </div>
-                        <div class="price">
-                          <span>$50</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="properties pb-20">
-                  <div class="properties-card">
-                    <div class="properties-img">
-                      <a href="book-details.html"
-                        ><img src="assets/img/gallery/best_selling4.jpg" alt=""
-                      /></a>
-                    </div>
-                    <div class="properties-caption">
-                      <h3><a href="book-details.html">Moon Dance</a></h3>
-                      <p>J. R Rain</p>
-                      <div
-                        class="properties-footer d-flex justify-content-between align-items-center"
-                      >
-                        <div class="review">
-                          <div class="rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-half"></i>
-                          </div>
-                          <p>(<span>120</span> Review)</p>
-                        </div>
-                        <div class="price">
-                          <span>$50</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
