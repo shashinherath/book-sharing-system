@@ -322,12 +322,12 @@ if (isset($_SESSION['email'])) {
             <p class="card-text">
               '.$roworg['description'].'
             </p>
-            <a href="#" class="btn btn-primary">View</a>
+            <a href="organization_details.php?id='.$roworg['org_id'].'" class="btn btn-primary">View</a>
           </div>
         </div>';
         }
         ?>
-          
+
       </div>
     </div>
   </div>
