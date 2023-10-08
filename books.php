@@ -422,7 +422,7 @@
                           <a href="book-view.php?isbn='.$row['isbn'].'"
                             ><img
                               src="'.$row['image'].'"
-                              alt="'.$row['book_name'].'"
+                              alt="'.$row['book_name'].'" height="280px"
                           /></a>
                         </div>
                         <div class="properties-caption properties-caption2">
