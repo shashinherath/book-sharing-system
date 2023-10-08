@@ -13,6 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (!empty($email) && !empty($password) && !is_numeric($email) && $password == $cpassword) {
         $query = "INSERT INTO user (name, email, phone, password, cpassword) VALUES ('$name','$email','$phone','$password','$cpassword')";
         if (mysqli_query($con, $query)) {
+            echo "<script type='text/javascript'>Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Your work has been saved',
+                  showConfirmButton: false,
+                  timer: 1500})
+                  </script>";
+            sleep(3);
             header("location: login.php");
         } else {
             echo "<script type='text/javascript'> alert('Error: " . mysqli_error($con) . "' ) </script>";
@@ -37,6 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
     />
+
+      <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css" />
@@ -185,7 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
           <div class="register-footer">
             <p>Already have an account? <a href="login.php"> Login</a> here</p>
-            <button class="submit-btn3" type="submit">Sign Up</button>
+            <button class="submit-btn3" type="submit" >Sign Up</button>
           </div>
             </form>
         </div>
@@ -314,5 +324,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/main.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
   </body>
 </html>
