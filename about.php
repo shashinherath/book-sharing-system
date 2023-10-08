@@ -143,7 +143,7 @@ if (isset($_SESSION['email'])) {
                           </ul>
                         </li>
                         <li><a href="books.php">Books</a></li>
-                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="about.php">About Us</a></li>
                         <li><a href="contact.php">Contact Us</a></li>
                       </ul>
                     </nav>
