@@ -357,3 +357,7 @@ input[type="textarea"]:focus {
 .headericonlist a:hover {
   color: blue !important;
 }
+
+.properties-caption.properties-caption2 {
+  height: 290px;
+}
