@@ -3,7 +3,7 @@
 
     include ('database.php');
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['signin'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
 
@@ -118,7 +118,7 @@
     
                                 <div class="form-group mb-3 text-center row mt-3 pt-1">
                                     <div class="col-12">
-                                        <button class="btn btn-info w-100 waves-effect waves-light" type="submit">Log In</button>
+                                        <button class="btn btn-info w-100 waves-effect waves-light" name="signin" type="submit">Log In</button>
                                     </div>
                                 </div>
     
@@ -380,10 +380,7 @@
                         break;
 
                             case "users":
-                                $queryusers = "SELECT * FROM user";
-                                $resultusers = mysqli_query($con, $queryusers);
-
-                                if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                                if (isset($_POST['user_add'])) {
                                     $uname = $_POST['uname'];
                                     $uemail = $_POST['uemail'];
                                     $uphone = $_POST['uphone'];
@@ -391,9 +388,9 @@
                                     $ucpassword = $_POST['ucpassword'];
 
                                     if (!empty($uemail) && !empty($upassword) && $upassword == $ucpassword) {
-                                        $queryaddu = "INSERT INTO user (uname, uemail, uphone, upassword, ucpassword) VALUES ('$uname','$uemail','$uphone','$upassword','$ucpassword')";
+                                        $queryaddu = "INSERT INTO user (name, email, phone, password, cpassword) VALUES ('$uname','$uemail','$uphone','$upassword','$ucpassword')";
                                         if (mysqli_query($con, $queryaddu)) {
-                                            header("location: admin.php?menu=users");
+
                                         } else {
                                             echo "<script type='text/javascript'> alert('Error: " . mysqli_error($con) . "' ) </script>";
                                         }
@@ -422,6 +419,9 @@
                                                 </tr>
                                             </thead><!-- end thead -->
                                             <tbody>';
+
+                                $queryusers = "SELECT * FROM user";
+                                $resultusers = mysqli_query($con, $queryusers);
 
                                 while ($rowusers = mysqli_fetch_assoc($resultusers)) {
 
@@ -515,7 +515,7 @@
                                             </div>
                                             <div>
         
-                                                <button class="btn btn-primary" type="submit">Add</button>
+                                                <button class="btn btn-primary" name="user_add" type="submit">Add</button>
                                             </div>
                                         </form>
                                     </div>
