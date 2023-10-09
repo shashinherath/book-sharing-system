@@ -17,6 +17,7 @@
                     if ($admin_data['password'] == $password) {
                         $_SESSION['adlogin'] = true;
                         $_SESSION['email'] = $email;
+                        $_SESSION['name'] = $admin_data['name'];
                         header("location:admin.php");
                     }
                 }
@@ -31,6 +32,10 @@
 
     $menu = isset($_GET['menu']) ? $_GET['menu'] : null;
 
+    if (isset($_GET['logout'])) {
+        session_destroy();
+        header("location:admin.php");
+    }
 
 ?>
 
@@ -151,21 +156,21 @@
                     <div class="d-flex">
                         <!-- LOGO -->
                         <div class="navbar-brand-box">
-                            <a href="index.html" class="logo logo-dark">
+                            <a href="admin.php" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <img src="assets/images/logo-sm.png" alt="logo-sm" height="22">
+                                    <img src="assets/images/logo/logo.png" alt="logo-sm" height="50">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="assets/images/logo-dark.png" alt="logo-dark" height="20">
+                                    <img src="assets/images/logo/logo.png" alt="logo-dark" height="50">
                                 </span>
                             </a>
 
-                            <a href="index.html" class="logo logo-light">
+                            <a href="admin.php" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="assets/images/logo-sm.png" alt="logo-sm-light" height="22">
+                                    <img src="assets/images/logo/logo.png" alt="logo-sm-light" height="50">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="assets/images/logo-light.png" alt="logo-light" height="20">
+                                    <img src="assets/images/logo/logo.png" alt="logo-light" height="50">
                                 </span>
                             </a>
                         </div>
@@ -181,14 +186,14 @@
                             <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                
-                                <span class="d-none d-xl-inline-block ms-1">Julia</span>
+                                <span class="d-none d-xl-inline-block ms-1">'.$_SESSION['name'].'</span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <!-- item-->
                                 <a class="dropdown-item" href="#"><i class="ri-user-line align-middle me-1"></i> Profile</a>
                                
-                                <a class="dropdown-item text-danger" href="#"><i class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
+                                <a class="dropdown-item text-danger" href="admin.php?logout"><i class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
                             </div>
                         </div>
 
@@ -285,6 +290,9 @@
                         switch ($menu) {
 
                             default:
+                                $queryucount = "SELECT COUNT(email) FROM user";
+                                $resultucount = mysqli_query($con, $queryucount);
+                                $rowucount = mysqli_fetch_assoc($resultucount);
                         echo '
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0">Dashboard</h4>
@@ -296,8 +304,8 @@
                                 <div class="card-body">
                                     <div class="d-flex">
                                         <div class="flex-grow-1">
-                                            <p class="text-truncate font-size-14 mb-2">New Users</p>
-                                            <h4 class="mb-2">8246</h4>
+                                            <p class="text-truncate font-size-14 mb-2">Users</p>
+                                            <h4 class="mb-2">'.$rowucount['COUNT(email)'].'</h4>
                                             <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>16.2%</span>from previous period</p>
                                         </div>
                                         <div class="avatar-sm">
@@ -374,6 +382,26 @@
                             case "users":
                                 $queryusers = "SELECT * FROM user";
                                 $resultusers = mysqli_query($con, $queryusers);
+
+                                if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                                    $uname = $_POST['uname'];
+                                    $uemail = $_POST['uemail'];
+                                    $uphone = $_POST['uphone'];
+                                    $upassword = $_POST['upassword'];
+                                    $ucpassword = $_POST['ucpassword'];
+
+                                    if (!empty($uemail) && !empty($upassword) && $upassword == $ucpassword) {
+                                        $queryaddu = "INSERT INTO user (uname, uemail, uphone, upassword, ucpassword) VALUES ('$uname','$uemail','$uphone','$upassword','$ucpassword')";
+                                        if (mysqli_query($con, $queryaddu)) {
+                                            header("location: admin.php?menu=users");
+                                        } else {
+                                            echo "<script type='text/javascript'> alert('Error: " . mysqli_error($con) . "' ) </script>";
+                                        }
+                                    } else {
+                                        echo "<script type='text/javascript'> alert('Please enter some valid information')</script>";
+                                    }
+                                }
+
                                 echo '
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0">Users</h4>
@@ -389,6 +417,8 @@
                                                     <th>Name</th>
                                                     <th>Email</th>
                                                     <th>Phone</th>
+                                                    <th></th>
+                                                    <th></th>
                                                 </tr>
                                             </thead><!-- end thead -->
                                             <tbody>';
@@ -405,6 +435,13 @@
                                                     <td>
                                                         '.$rowusers['phone'].'
                                                     </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-success btn-rounded waves-effect waves-light">Update</button>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-danger btn-rounded waves-effect waves-light">Delete</button>
+                                                    </td>
+                                                    
                                                 </tr>';
                                 }
 
@@ -417,7 +454,74 @@
                                     </div>
                                 </div><!-- end card -->
                             </div><!-- end card -->
-                        </div>';
+                        </div>
+                        
+                        <div class="col-xl-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Add User</h4>
+                                        
+                                        <form class="needs-validation" method="post">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="mb-3 position-relative">
+                                                        <label for="validationTooltip01" class="form-label">Name</label>
+                                                        <input type="text" class="form-control" name="uname" id="validationTooltip01" placeholder="Name" required>
+                                                        <div class="valid-tooltip">
+                                                            Looks good!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="mb-3 position-relative">
+                                                        <label for="validationTooltip02" class="form-label">Email</label>
+                                                        <input type="email" class="form-control" name="uemail" id="validationTooltip02" placeholder="Email" required>
+                                                        <div class="valid-tooltip">
+                                                            Looks good!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3 position-relative">
+                                                        <label for="validationTooltip04" class="form-label">Phone</label>
+                                                        <input type="tel" class="form-control" name="uphone" id="validationTooltip04" placeholder="Phone" required>
+                                                        <div class="invalid-tooltip">
+                                                            Please provide a valid Phone.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="mb-3 position-relative">
+                                                        <label for="validationTooltip04" class="form-label">Password</label>
+                                                        <input type="password" class="form-control" name="upassword" id="validationTooltip04" placeholder="Password" required>
+                                                        <div class="invalid-tooltip">
+                                                            Please provide a valid Password.
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="mb-3 position-relative">
+                                                        <label for="validationTooltip03" class="form-label">Confirm Password</label>
+                                                        <input type="password" class="form-control" name="ucpassword" id="validationTooltip03" placeholder="Password" required>
+                                                        <div class="invalid-tooltip">
+                                                            Please confirm the Password.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <div>
+        
+                                                <button class="btn btn-primary" type="submit">Add</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- end card -->
+                            </div>';
                                 break;
 
                             case "books":
