@@ -1,9 +1,33 @@
 <?php
+    session_start();
 
     include ('database.php');
 
-    $querybook = "SELECT * FROM books";
-    $resultbook = mysqli_query($con, $querybook);
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        if (!empty($email) && !empty($password)) {
+            $querylogin = "SELECT * FROM admin WHERE email = '$email' LIMIT 1";
+            $resultlogin = mysqli_query($con, $querylogin);
+
+            if ($resultlogin) {
+                if ($resultlogin && mysqli_num_rows($resultlogin) > 0) {
+                    $admin_data = mysqli_fetch_assoc($resultlogin);
+                    if ($admin_data['password'] == $password) {
+                        $_SESSION['adlogin'] = true;
+                        $_SESSION['email'] = $email;
+                        header("location:admin.php");
+                    }
+                }
+
+            }
+            echo "<script type='text/javascript'> alert('Wrong user name or password')</script>";
+        } else {
+            echo "<script type='text/javascript'> alert('Wrong user name or password')</script>";
+        }
+
+    }
 
     $menu = isset($_GET['menu']) ? $_GET['menu'] : null;
 
@@ -42,6 +66,79 @@
     </head>
 
     <body data-topbar="dark">
+
+    <?php
+
+    switch (isset($_SESSION['adlogin']) ? $_SESSION['adlogin'] : null) {
+
+        default:
+            echo '<div class="wrapper-page">
+            <div class="container-fluid p-0">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="text-center mt-4">
+                            <div class="mb-3">
+                                <a href="#" class="auth-logo">
+                                    <img src="assets\images\logo\logo.png" height="50" class="logo-light mx-auto" alt="Book Bridge">
+                                </a>
+                            </div>
+                        </div>
+    
+                        <h4 class="text-muted text-center font-size-18"><b>Admin</b></h4>
+    
+                        <div class="p-3">
+                            <form class="form-horizontal mt-3" method="post">
+    
+                                <div class="form-group mb-3 row">
+                                    <div class="col-12">
+                                        <input class="form-control" name="email" type="text" required="" placeholder="Email">
+                                    </div>
+                                </div>
+    
+                                <div class="form-group mb-3 row">
+                                    <div class="col-12">
+                                        <input class="form-control" name="password" type="password" required="" placeholder="Password">
+                                    </div>
+                                </div>
+    
+                                <div class="form-group mb-3 row">
+                                    <div class="col-12">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                            <label class="form-label ms-1" for="customCheck1">Remember me</label>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="form-group mb-3 text-center row mt-3 pt-1">
+                                    <div class="col-12">
+                                        <button class="btn btn-info w-100 waves-effect waves-light" type="submit">Log In</button>
+                                    </div>
+                                </div>
+    
+                                <div class="form-group mb-0 row mt-2">
+                                    <div class="col-sm-7 mt-3">
+                                        <a href="#" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password?</a>
+                                    </div>
+                                    <div class="col-sm-5 mt-3">
+                                        <a href="#" class="text-muted"><i class="mdi mdi-account-circle"></i> Create an account</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- end -->
+                    </div>
+                    <!-- end cardbody -->
+                </div>
+                <!-- end card -->
+            </div>
+            <!-- end container -->
+        </div>';
+            break;
+
+        case true:
+    echo'
     
     <!-- <body data-layout="horizontal" data-topbar="dark"> -->
 
@@ -141,26 +238,26 @@
                                 </ul>
                             </li> -->
                             <li>
-                                <a href="admin.php?menu=user" class="waves-effect">
-                                    <i class="ri-user-line"></i>user
+                                <a href="admin.php?menu=users" class="waves-effect">
+                                    <i class="ri-user-line"></i>Users
                                 </a>
                             </li>
                         
                             <li>
                                 <a href="admin.php?menu=books" class="waves-effect">
-                                    <i class="ri-dashboard-line"></i>books
+                                    <i class="ri-dashboard-line"></i>Books
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="admin.php?menu=organizations" class="waves-effect">
+                                    <i class="ri-dashboard-line"></i>Organizations
                                 </a>
                             </li>
                         
                             <li>
                                 <a href="" class="waves-effect">
-                                    <i class="ri-dashboard-line"></i>Dashboard
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="" class="waves-effect">
-                                    <i class="ri-dashboard-line"></i>Dashboard
+                                    <i class="ri-dashboard-line"></i>Contact
                                 </a>
                             </li>
                         
@@ -181,9 +278,9 @@
             <div class="main-content">
 
                 <div class="page-content">
-                    <div class="container-fluid">
+                    <div class="container-fluid">';
 
-                        <?php
+
 
                         switch ($menu) {
 
@@ -274,23 +371,75 @@
                         </div>';
                         break;
 
-                            case "books":
-                        echo '
+                            case "users":
+                                $queryusers = "SELECT * FROM user";
+                                $resultusers = mysqli_query($con, $queryusers);
+                                echo '
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0">Users</h4>
+                        </div>
                         <div class="col-xl-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title mb-4">Books</h4>
+                                    <div class="table-responsive">
+                                        <table class="table table-centered mb-0 align-middle table-hover table-nowrap">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Phone</th>
+                                                </tr>
+                                            </thead><!-- end thead -->
+                                            <tbody>';
 
+                                while ($rowusers = mysqli_fetch_assoc($resultusers)) {
+
+                                    echo '
+                                                <tr>
+                                                    <td><h6 class="mb-0">'.$rowusers['id'].'</h6></td>
+                                                    <td>'.$rowusers['name'].'</td>
+                                                    <td>
+                                                        '.$rowusers['email'].'
+                                                    </td>
+                                                    <td>
+                                                        '.$rowusers['phone'].'
+                                                    </td>
+                                                </tr>';
+                                }
+
+                                echo '    
+                                                 <!-- end -->
+                                                 
+                                                 <!-- end -->
+                                            </tbody><!-- end tbody -->
+                                        </table> <!-- end table -->
+                                    </div>
+                                </div><!-- end card -->
+                            </div><!-- end card -->
+                        </div>';
+                                break;
+
+                            case "books":
+                                $querybook = "SELECT * FROM books";
+                                $resultbook = mysqli_query($con, $querybook);
+                        echo '
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0">Books</h4>
+                        </div>
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-body">
                                     <div class="table-responsive">
                                         <table class="table table-centered mb-0 align-middle table-hover table-nowrap">
                                             <thead class="table-light">
                                                 <tr>
                                                     <th>Name</th>
-                                                    <th>Position</th>
-                                                    <th>Status</th>
-                                                    <th>Age</th>
-                                                    <th>Start date</th>
-                                                    <th style="width: 120px;">Salary</th>
+                                                    <th>Author</th>
+                                                    <th>Category</th>
+                                                    <th>ISBN</th>
+                                                    <th>Image</th>
+                                                    <th style="width: 120px;">Price</th>
                                                 </tr>
                                             </thead><!-- end thead -->
                                             <tbody>';
@@ -324,9 +473,59 @@
                                 </div><!-- end card -->
                             </div><!-- end card -->
                         </div>';
-                                                    break;
+                            break;
+
+                            case "organizations":
+                                $queryorg = "SELECT * FROM organizations";
+                                $resultorg = mysqli_query($con, $queryorg);
+                                echo '
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0">Organizations</h4>
+                        </div>
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-centered mb-0 align-middle table-hover table-nowrap">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Name</th>
+                                                    <th>Total Donations</th>
+                                                    <th>Image</th>
+                                                </tr>
+                                            </thead><!-- end thead -->
+                                            <tbody>';
+
+                                while ($roworg = mysqli_fetch_assoc($resultorg)) {
+
+                                    echo '
+                                                <tr>
+                                                    <td><h6 class="mb-0">'.$roworg['org_id'].'</h6></td>
+                                                    <td>'.$roworg['org_name'].'</td>
+                                                    <td>
+                                                        '.$roworg['total_donations'].'
+                                                    </td>
+                                                    <td>
+                                                        <img src="'.$roworg['image'].'" height="50px" width="75px">
+                                                    </td>
+                                                    
+                                                </tr>';
+                                }
+
+                                echo '    
+                                                 <!-- end -->
+                                                 
+                                                 <!-- end -->
+                                            </tbody><!-- end tbody -->
+                                        </table> <!-- end table -->
+                                    </div>
+                                </div><!-- end card -->
+                            </div><!-- end card -->
+                        </div>';
+                                break;
                          }
-                        ?>
+                        echo '
                     </div>
                     
                 </div>
@@ -352,7 +551,10 @@
 
         </div>
         <!-- END layout-wrapper -->
-
+        ';
+            break;
+        }
+    ?>
 
 
 
