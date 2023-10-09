@@ -399,6 +399,18 @@
                                     }
                                 }
 
+                                if (isset($_POST['delete_user'])) {
+                                    $user_id = $_POST['user_id'];
+
+                                    $querydeleteu = "DELETE FROM user WHERE id = $user_id";
+
+                                    if (mysqli_query($con, $querydeleteu)) {
+
+                                    } else {
+                                        echo "Error: " . mysqli_error($con);
+                                    }
+                                }
+
                                 echo '
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0">Users</h4>
@@ -439,7 +451,10 @@
                                                         <button type="button" class="btn btn-success btn-rounded waves-effect waves-light">Update</button>
                                                     </td>
                                                     <td>
-                                                        <button type="button" class="btn btn-danger btn-rounded waves-effect waves-light">Delete</button>
+                                                        <form method="post">
+                                                            <input type="hidden" name="user_id" value="'.$rowusers['id'].'">
+                                                            <button type="submit" class="btn btn-danger btn-rounded waves-effect waves-light" name="delete_user">Delete</button>
+                                                        </form>
                                                     </td>
                                                     
                                                 </tr>';
