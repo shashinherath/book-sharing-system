@@ -13,14 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (!empty($email) && !empty($password) && !is_numeric($email) && $password == $cpassword) {
         $query = "INSERT INTO user (name, email, phone, password, cpassword) VALUES ('$name','$email','$phone','$password','$cpassword')";
         if (mysqli_query($con, $query)) {
-            echo "<script type='text/javascript'>Swal.fire({
-                  position: 'center',
-                  icon: 'success',
-                  title: 'Your work has been saved',
-                  showConfirmButton: false,
-                  timer: 1500})
-                  </script>";
-            sleep(3);
+            $_SESSION['registered'] = true;
             header("location: login.php");
         } else {
             echo "<script type='text/javascript'> alert('Error: " . mysqli_error($con) . "' ) </script>";

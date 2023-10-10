@@ -18,6 +18,11 @@
     $querybook = "SELECT * FROM books LIMIT 7";
     $resultbook = mysqli_query($con, $querybook);
 
+    if (isset($_GET['logout'])) {
+        session_destroy();
+        header("location:index.php");
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -116,6 +121,10 @@
                           <a href="profile.php" class="headericon"
                             ><i class="bi bi-person-circle"></i><br />
                             <span>'. $row['name'] .'</span>
+                          </a>
+                          <a href="index.php?logout" class="headericon">
+                            <i class="bi bi-box-arrow-right"></i><br>
+                            <span>Log Out</span>
                           </a>';
                             }
                             else {

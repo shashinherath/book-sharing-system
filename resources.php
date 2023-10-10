@@ -15,6 +15,11 @@ if (isset($_SESSION['email'])) {
     }
 }
 
+    if (isset($_GET['logout'])) {
+        session_destroy();
+        header("location:index.php");
+    }
+
 ?>
 
 <!DOCTYPE html>

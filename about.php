@@ -14,6 +14,10 @@ if (isset($_SESSION['email'])) {
         die("Error: " . mysqli_error($con));
     }
 }
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header("location:index.php");
+}
 
 ?>
 

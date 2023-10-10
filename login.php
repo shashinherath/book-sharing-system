@@ -57,8 +57,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="assets/css/slick.css" />
     <link rel="stylesheet" href="assets/css/nice-select.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   </head>
   <body>
+
+  <?php
+  if (isset($_SESSION['registered']) ? $_SESSION['registered'] == true : false) {
+      ?>
+
+      <script>
+          swal("Registration Successfully!", "Please log in to your account.", "success", {
+              buttons: false,
+              timer: 3000,
+          });
+      </script>
+
+      <?php
+      $_SESSION['registered'] = false;
+  }
+  ?>
+
     <!-- Navigation bar -->
 
     <header>

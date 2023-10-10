@@ -51,8 +51,11 @@
         mysqli_query($con, "DELETE FROM cart WHERE id = $remove_id");
         $_SESSION['cartcnt'] = $_SESSION['cartcnt'] - 1;
     }
-      
-            
+
+    if (isset($_GET['logout'])) {
+        session_destroy();
+        header("location:index.php");
+    }
 
 ?>
 <!DOCTYPE html>
@@ -214,8 +217,8 @@
                       echo '
                       <thead>
                       <tr>
-                          <th scope="col">Product</th>
-                          <th scope="col">image</th>
+                          <th scope="col">Book</th>
+                          <th scope="col"></th>
                           <th scope="col">Price</th>
                           <th>Quantity</th>
                           <th scope="col">Total</th>
@@ -232,11 +235,11 @@
                         ?>
 
                     <tr>
-                      <td><?php  echo $rowcart['name']?></td>
                       <td> <img
                             src="<?php  echo $rowcart['image']?>" height="170px" width="120px"
                             alt=""
                           /></td>
+                      <td><?php  echo $rowcart['name']?></td>
                       <td>Rs.<?php  echo $rowcart['price']?></td>
 
                       <td style=" width:200px;">

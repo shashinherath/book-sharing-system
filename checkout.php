@@ -31,6 +31,11 @@ if (isset($_POST['pay_donate'])) {
     }
 }
 
+    if (isset($_GET['logout'])) {
+        session_destroy();
+        header("location:index.php");
+    }
+
 ?>
 
 <!doctype html>
