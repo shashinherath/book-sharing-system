@@ -42,6 +42,10 @@ if (isset($_SESSION['email'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>BookBridge</title>
+
+      <!-- Site Icon -->
+      <link rel="Icon" href="Images/icon.png" />
+
     <script src="https://kit.fontawesome.com/76455c8101.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="CSS/style.css" />

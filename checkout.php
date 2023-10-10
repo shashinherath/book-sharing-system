@@ -56,6 +56,9 @@ if (isset($_POST['pay_donate'])) {
     <meta name="generator" content="Hugo 0.118.2">
     <title>Checkout | Book Bridge</title>
 
+      <!-- Site Icon -->
+      <link rel="Icon" href="Images/icon.png" />
+
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/checkout/">
 
 

@@ -80,6 +80,9 @@
 
     <title>BookBridge</title>
 
+    <!-- Site Icon -->
+    <link rel="Icon" href="Images/icon.png" />
+
     <link rel="stylesheet" href="CSS/style.css" />
 
     <link
