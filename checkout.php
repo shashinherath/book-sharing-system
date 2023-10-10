@@ -9,15 +9,22 @@ if (isset($_POST['pay_donate'])) {
     // Retrieve data from session variables
 
 
-    $org = mysqli_real_escape_string($con, $_SESSION['org']);
+    $org_id = mysqli_real_escape_string($con, $_SESSION['org_id']);
     $subtotal = mysqli_real_escape_string($con, $_SESSION['subtotal']);
     $tqty = mysqli_real_escape_string($con, $_SESSION['tqty']);
     $email = mysqli_real_escape_string($con, $_SESSION['email']);
 
     $queryadd = "INSERT INTO donations (total_qty, total_price, organization, user)
-                 VALUES ('$tqty', '$subtotal', '$org', '$email')";
+                 VALUES ('$tqty', '$subtotal', '$org_id', '$email')";
 
     $resultadd = mysqli_query($con, $queryadd);
+
+    $org_count_result = mysqli_query($con, "SELECT total_donations FROM organizations WHERE org_id = $org_id");
+
+    $org_count_row = mysqli_fetch_assoc($org_count_result);
+    $org_total = $org_count_row['total_donations'] + $tqty;
+
+    mysqli_query($con,"UPDATE  organizations  SET total_donations = $org_total WHERE org_id = $org_id");
 
     if ($resultadd) {
         $sql = "DELETE FROM cart WHERE user_email = '$email'";
