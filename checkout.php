@@ -1,3 +1,38 @@
+
+<?php
+session_start();
+include('database.php');
+
+$email = $_SESSION['email'];
+
+if (isset($_POST['pay_donate'])) {
+    // Retrieve data from session variables
+  
+
+    $org = mysqli_real_escape_string($con, $_SESSION['org']);
+    $subtotal = mysqli_real_escape_string($con, $_SESSION['subtotal']);
+    $tqty = mysqli_real_escape_string($con, $_SESSION['tqty']);
+    $email = mysqli_real_escape_string($con, $_SESSION['email']);
+
+    $queryadd = "INSERT INTO donations (total_qty, total_price, organization, user)
+                 VALUES ('$tqty', '$subtotal', '$org', '$email')";
+              
+    $resultadd = mysqli_query($con, $queryadd);
+    
+    if ($resultadd) {
+        $sql = "DELETE FROM cart WHERE user_email = '$email'";
+        $result = mysqli_query($con, $sql);
+        $_SESSION['cartcnt'] = 0;
+        header('location:index.php');
+
+    } else {
+        echo "Error: " . mysqli_error($con);
+    }
+}
+
+?>
+  
+
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head><script src="../assets/js/color-modes.js"></script>
@@ -143,7 +178,8 @@
       </ul>
     </div>
 
-    
+
+
 <div class="container">
   <main>
     <div class="py-5 text-center">
@@ -155,48 +191,35 @@
       <div class="col-md-5 col-lg-4 order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-primary">Your cart</span>
-          <span class="badge bg-primary rounded-pill">3</span>
+          <span class="badge bg-primary rounded-pill"><?php echo $_SESSION['cartcnt']?></span>
         </h4>
         <ul class="list-group mb-3">
+            <?php
+            $select_cart_products = mysqli_query($con, "SELECT * FROM cart where user_email = '$email'");
+
+                while ($rowcart = mysqli_fetch_assoc($select_cart_products)) {
+                echo '
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
-              <h6 class="my-0">Product name</h6>
-              <small class="text-body-secondary">Brief description</small>
+              <h6 class="my-0">'.$rowcart['name'].' <span class="badge bg-success rounded-pill">x '.$rowcart['qty'].'</span></h6>
             </div>
-            <span class="text-body-secondary">$12</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Second product</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">$8</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Third item</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">$5</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
-            <div class="text-success">
-              <h6 class="my-0">Promo code</h6>
-              <small>EXAMPLECODE</small>
-            </div>
-            <span class="text-success">−$5</span>
-          </li>
+            <span class="text-body-secondary">Rs.'.$rowcart['price'] * $rowcart['qty'].'</span>
+          </li>';
+            }
+            ?>
+
           <li class="list-group-item d-flex justify-content-between">
-            <span>Total (USD)</span>
-            <strong>$20</strong>
+            <span>Total (Rs)</span>
+            <strong>Rs.<?php echo $_SESSION['subtotal'] ?></strong>
           </li>
+
         </ul>
 
 
       </div>
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Billing address</h4>
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation" novalidate method="post">
           <div class="row g-3">
             <div class="col-sm-6">
               <label for="firstName" class="form-label">First name</label>
@@ -313,8 +336,10 @@
 
           <hr class="my-4">
 
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Pay & Donate</button>
-        </form>
+            <input type="submit" class="w-100 btn btn-primary btn-lg" value="Pay & Donate" name="pay_donate" >
+          </form>
+
+        
       </div>
     </div>
   </main>
@@ -327,3 +352,5 @@
 
     <script src="/JS/checkout.js"></script></body>
 </html>
+
+
