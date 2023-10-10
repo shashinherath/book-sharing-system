@@ -39,7 +39,7 @@
 //      $select_email = mysqli_query($con, "SELECT * FROM cart WHERE user_email = '$email'");
       
       if (mysqli_num_rows($existing_book) > 0) {
-          echo "Product already added to cart";
+
       } else {
           $queryadd = "INSERT INTO cart (name, price, qty, user_email, isbn, image)
           VALUES ('$name', '$price', $qty, '$email', '$isbn', '$image')";
@@ -55,8 +55,7 @@
       
            $_SESSION['cartcnt'] =0;
            $_SESSION['cartcnt'] = $_SESSION['cartcnt'] + $row_count;
-      
-              echo "Product added to cart successfully";
+
           } else {
               die("Error: " . mysqli_error($con));
           }
