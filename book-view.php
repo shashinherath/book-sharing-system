@@ -25,17 +25,47 @@
         }
     }
 
-    if (isset($_GET['add'])) {
-        $_SESSION['cartcnt'] = $_SESSION['cartcnt'] + 1;
 
-        $queryadd = "INSERT INTO cart (email, isbn) VALUES ('$email', '$isbn')";
+    if (isset($_POST['add_to_cart'])) {
 
-        $resultadd = mysqli_query($con, $queryadd);
-
-        if (!$resultadd) {
-            die("Error: " . mysqli_error($con));
-        }
-    }
+      $name = mysqli_real_escape_string($con, $_POST['book_name']);
+      $price = mysqli_real_escape_string($con, $_POST['price']);
+      $qty = 1; 
+//      $user_email = mysqli_real_escape_string($con, $email);
+//      $isbn = mysqli_real_escape_string($con, $isbn);
+      $image = mysqli_real_escape_string($con, $_POST['image']);
+      
+      $existing_book = mysqli_query($con, "SELECT * FROM cart WHERE isbn = '$isbn' and user_email = '$email'");
+//      $select_email = mysqli_query($con, "SELECT * FROM cart WHERE user_email = '$email'");
+      
+      if (mysqli_num_rows($existing_book) > 0) {
+          echo "Product already added to cart";
+      } else {
+          $queryadd = "INSERT INTO cart (name, price, qty, user_email, isbn, image)
+          VALUES ('$name', '$price', $qty, '$email', '$isbn', '$image')";
+      
+          $resultadd = mysqli_query($con, $queryadd);
+      
+          if ($resultadd) {
+                  // Corrected SQL query
+           $select_product = mysqli_query($con, "SELECT * FROM cart WHERE user_email = '$email'") or die('Query failed');
+      
+           // Check the number of rows returned
+           $row_count = mysqli_num_rows($select_product);
+      
+           $_SESSION['cartcnt'] =0;
+           $_SESSION['cartcnt'] = $_SESSION['cartcnt'] + $row_count;
+      
+              echo "Product added to cart successfully";
+          } else {
+              die("Error: " . mysqli_error($con));
+          }
+      }
+      
+      
+      
+      
+      }
 
 ?>
 
@@ -222,8 +252,16 @@
                           <i class="bi bi-star-half"></i>
                         </div>
                         <p>(137 Review)</p>
-                      </div>
-                      <a href="?isbn='.$isbn.'&add" class="white-btn mr-10" >Add to Cart</a>
+                      </div>zz
+                      <form action="" method="post">
+
+                      <input type="hidden"  name="book_name" value="'.$row['book_name'].'">
+                      <input type="hidden"  name="price" value="'.$row['price'].'">
+                      <input type="hidden"  name="image" value="'.$row['image'].'">
+                      
+                      <input type="submit" value="add" name="add_to_cart" class="white-btn mr-10">
+                      
+                      </form> 
                     </div>
                     
 
