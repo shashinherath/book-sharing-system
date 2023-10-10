@@ -26,7 +26,7 @@
     }
 
 
-    if (isset($_POST['add_to_cart'])) {
+    if (isset($_POST['add_to_cart']) && isset($email)) {
 
       $name = mysqli_real_escape_string($con, $_POST['book_name']);
       $price = mysqli_real_escape_string($con, $_POST['price']);
@@ -61,9 +61,7 @@
               die("Error: " . mysqli_error($con));
           }
       }
-      
-      
-      
+
       
       }
 
