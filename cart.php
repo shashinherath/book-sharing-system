@@ -35,7 +35,7 @@
       $subtotal = mysqli_real_escape_string($con, $_POST['subtotal']);
       $tqty = mysqli_real_escape_string($con, $_POST['tqty']);
 
-      $_SESSION['org'] = $org;
+      $_SESSION['org_id'] = $org;
       $_SESSION['subtotal'] = $subtotal;
       $_SESSION['tqty'] = $tqty;
 
