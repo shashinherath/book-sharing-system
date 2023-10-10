@@ -226,7 +226,7 @@
                             <li class="menu-title">Menu</li>
 
                             <li>
-                                <a href="admin.php"  class="waves-effect">
+                                <a href="admin.php" class="waves-effect">
                                     <i class="ri-dashboard-line"></i>Dashboard
                                 </a>
                             </li>
@@ -250,19 +250,19 @@
                         
                             <li>
                                 <a href="admin.php?menu=books" class="waves-effect">
-                                    <i class="ri-dashboard-line"></i>Books
+                                    <i class="ri-book-line"></i>Books
                                 </a>
                             </li>
                         
                             <li>
                                 <a href="admin.php?menu=organizations" class="waves-effect">
-                                    <i class="ri-dashboard-line"></i>Organizations
+                                    <i class="ri-building-line"></i>Organizations
                                 </a>
                             </li>
                         
                             <li>
-                                <a href="" class="waves-effect">
-                                    <i class="ri-dashboard-line"></i>Contact
+                                <a href="admin.php?menu=contact" class="waves-effect">
+                                    <i class="ri-contacts-line"></i>Contact
                                 </a>
                             </li>
                         
@@ -559,6 +559,8 @@
                                                     <th>ISBN</th>
                                                     <th>Image</th>
                                                     <th style="width: 120px;">Price</th>
+                                                    <th></th>
+                                                    <th></th>
                                                 </tr>
                                             </thead><!-- end thead -->
                                             <tbody>';
@@ -579,6 +581,15 @@
                                                         <img src="'.$rowbook['image'].'" height="50px" width="25px">
                                                     </td>
                                                     <td>'.$rowbook['price'].'</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-success btn-rounded waves-effect waves-light">Update</button>
+                                                    </td>
+                                                    <td>
+                                                        <form method="post">
+                                                            <input type="hidden" name="user_id" value="">
+                                                            <button type="submit" class="btn btn-danger btn-rounded waves-effect waves-light" name="">Delete</button>
+                                                        </form>
+                                                    </td>
                                                 </tr>';
                                                     }
 
@@ -612,6 +623,8 @@
                                                     <th>Name</th>
                                                     <th>Total Donations</th>
                                                     <th>Image</th>
+                                                    <th></th>
+                                                    <th></th>
                                                 </tr>
                                             </thead><!-- end thead -->
                                             <tbody>';
@@ -627,6 +640,15 @@
                                                     </td>
                                                     <td>
                                                         <img src="'.$roworg['image'].'" height="50px" width="75px">
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-success btn-rounded waves-effect waves-light">Update</button>
+                                                    </td>
+                                                    <td>
+                                                        <form method="post">
+                                                            <input type="hidden" name="user_id" value="">
+                                                            <button type="submit" class="btn btn-danger btn-rounded waves-effect waves-light" name="">Delete</button>
+                                                        </form>
                                                     </td>
                                                     
                                                 </tr>';
