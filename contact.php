@@ -15,6 +15,19 @@ if (isset($_SESSION['email'])) {
     }
 }
 
+    if (isset($_POST['contact_submit'])) {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $message = $_POST['message'];
+
+        $querycontact = "INSERT INTO contact (name, email, message) VALUES ('$name','$email','$message')";
+        if (mysqli_query($con, $querycontact)) {
+                header("location: contact.php");
+            } else {
+                echo "<script type='text/javascript'> alert('Error: " . mysqli_error($con) . "' ) </script>";
+            }
+    }
+
     if (isset($_GET['logout'])) {
         session_destroy();
         header("location:index.php");
@@ -217,18 +230,18 @@ if (isset($_SESSION['email'])) {
           <div class="right-side">
             <div class="topic-text">Send us a message</div>
             <p></p>
-            <form action="#">
+            <form id="contact_form" method="post">
               <div class="input-box">
-                <input type="text" placeholder="Enter your name" />
+                <input type="text" name="name" placeholder="Enter your name" required/>
               </div>
               <div class="input-box">
-                <input type="text" placeholder="Enter your email" />
+                <input type="email" name="email" placeholder="Enter your email" required/>
               </div>
               <div class="input-box message-box">
-                <textarea placeholder="Enter your message"></textarea>
+                <textarea placeholder="Enter your message" name="message" required></textarea>
               </div>
               <div class="button">
-                <a href="#" class="btn header-btn">Submit</a>
+                  <button class="btn header-btn" type="submit" name="contact_submit">Submit</button>
               </div>
             </form>
           </div>
