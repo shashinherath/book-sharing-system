@@ -95,6 +95,10 @@ if (isset($_SESSION['email'])) {
                           <a href="profile.php" class="headericon"
                             ><i class="bi bi-person-circle"></i><br />
                             <span>'. $row['name'] .'</span>
+                          </a>
+                          <a href="index.php?logout" class="headericon">
+                            <i class="bi bi-box-arrow-right"></i><br>
+                            <span>Log Out</span>
                           </a>';
                             }
                             else {
