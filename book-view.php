@@ -39,7 +39,7 @@
 //      $select_email = mysqli_query($con, "SELECT * FROM cart WHERE user_email = '$email'");
       
       if (mysqli_num_rows($existing_book) > 0) {
-
+          $_SESSION['book_exist'] = true;
       } else {
           $queryadd = "INSERT INTO cart (name, price, qty, user_email, isbn, image)
           VALUES ('$name', '$price', $qty, '$email', '$isbn', '$image')";
@@ -56,6 +56,7 @@
            $_SESSION['cartcnt'] =0;
            $_SESSION['cartcnt'] = $_SESSION['cartcnt'] + $row_count;
 
+           $_SESSION['book_add'] = true;
           } else {
               die("Error: " . mysqli_error($con));
           }
@@ -93,8 +94,44 @@
     <link rel="stylesheet" href="assets/css/slick.css" />
     <link rel="stylesheet" href="assets/css/nice-select.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   </head>
   <body>
+
+  <?php
+  if (isset($_SESSION['book_add']) ? $_SESSION['book_add'] == true : false) {
+      ?>
+
+      <script>
+          swal("Added Successfully!", {
+                  icon: "success",
+                  buttons: false,
+                  timer: 1500,
+              });
+      </script>
+
+      <?php
+      $_SESSION['book_add'] = false;
+  }
+  ?>
+
+  <?php
+  if (isset($_SESSION['book_exist']) ? $_SESSION['book_exist'] == true : false) {
+      ?>
+
+      <script>
+          swal("Already Exist!", {
+              icon: "warning",
+              buttons: false,
+              timer: 1500,
+          });
+      </script>
+
+      <?php
+      $_SESSION['book_exist'] = false;
+  }
+  ?>
     <!-- Navigation bar -->
 
     <header>
