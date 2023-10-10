@@ -1,37 +1,58 @@
 <?php
-    session_start();
+     session_start();
 
-    include('database.php');
+     include('database.php');
+ 
+     $_SESSION['cartcnt'] = (isset($_SESSION['cartcnt'])) ? $_SESSION['cartcnt'] : 0;
+ 
+ 
+     if (isset($_SESSION['email'])) {
+         $email = $_SESSION['email'];
+         $queryuser = "SELECT * FROM user where email = '$email' ";
+         $resultuser = mysqli_query($con, $queryuser);
+ 
+         if (!$resultuser) {
+             die("Error: " . mysqli_error($con));
+         }
+     }
 
-    $_SESSION['cartcnt'] = (isset($_SESSION['cartcnt'])) ? $_SESSION['cartcnt'] : 0;
 
-    if (isset($_SESSION['email'])) {
-        $email = $_SESSION['email'];
-        $queryuser = "SELECT * FROM user where email = '$email' ";
-        $resultuser = mysqli_query($con, $queryuser);
+    
+    if (isset($_POST['update_cart_quantity'])) {
 
-        if (!$resultuser) {
-            die("Error: " . mysqli_error($con));
-        }
-    }
+      $id = mysqli_real_escape_string($con, $_POST['update_id']);
+      $update_qty = mysqli_real_escape_string($con, $_POST['update_qty']);
+      $update_quanttity_quary=mysqli_query($con,"UPDATE  cart  set qty = $update_qty WHERE id = $id");
 
-    if (isset($email)) {
-        $querycart = "SELECT * FROM cart where email = '$email'";
-        $resultcart = mysqli_query($con, $querycart);
-        if (!$resultcart) {
-            die("Error: " . mysqli_error($con));
-        }
-    }
 
-    if (isset($email)) {
-        $queryorg = "SELECT * FROM organizations";
-        $resultorg = mysqli_query($con, $queryorg);
-        if (!$resultorg) {
-            die("Error: " . mysqli_error($con));
-        }
     }
 
 
+
+    if (isset($_POST['checkout_btn']) && $_SESSION['cartcnt'] > 0) {
+
+      $org = mysqli_real_escape_string($con, $_POST['org']);
+      $subtotal = mysqli_real_escape_string($con, $_POST['subtotal']);
+      $tqty = mysqli_real_escape_string($con, $_POST['tqty']);
+
+      $_SESSION['org'] = $org;
+      $_SESSION['subtotal'] = $subtotal;
+      $_SESSION['tqty'] = $tqty;
+
+      header("location:checkout.php");
+    
+      
+      
+      }
+
+    if (isset($_GET['remove'])) {
+        $remove_id = $_GET['remove'];
+
+        mysqli_query($con, "DELETE FROM cart WHERE id = $remove_id");
+        $_SESSION['cartcnt'] = $_SESSION['cartcnt'] - 1;
+    }
+      
+            
 
 ?>
 <!DOCTYPE html>
@@ -183,119 +204,152 @@
 
     <main>
       <section class="cart_area section-padding">
-        <div class="container">
+        <div class="" style="padding-left:80px;">
           <div class="cart_inner">
             <div class="table-responsive">
               <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Product</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <?php
-                    while ($rowcart = mysqli_fetch_assoc($resultcart)) {
+              <?php
+                  $select_cart_products = mysqli_query($con, "SELECT * FROM cart where user_email = '$email'");
+                  if (mysqli_num_rows($select_cart_products) > 0) {
+                      echo '
+                      <thead>
+                      <tr>
+                          <th scope="col">Product</th>
+                          <th scope="col">image</th>
+                          <th scope="col">Price</th>
+                          <th>Quantity</th>
+                          <th scope="col">Total</th>
+                          <th scope="col"></th>
+                      </tr>
+                      </thead>
+                      <tbody>';
+                      $total = 0;
+                      $tqty = 0;
 
-                        $isbncart = $rowcart['isbn'];
-                        $queryitem = "SELECT * FROM books where isbn = '$isbncart'";
-                        $resultitem = mysqli_query($con, $queryitem);
-                        if (!$resultitem) {
-                            die("Error: " . mysqli_error($con));
-                        }
+                      while ($rowcart = mysqli_fetch_assoc($select_cart_products)) {
 
-                        $rowitem = mysqli_fetch_assoc($resultitem);
 
-                        echo '
-                  <tr>
-                    <td>
-                      <div class="media">
-                        <div class="d-flex">
-                          <img
-                            src="' . $rowitem['image'] . '"
+                        ?>
+
+                    <tr>
+                      <td><?php  echo $rowcart['name']?></td>
+                      <td> <img
+                            src="<?php  echo $rowcart['image']?>" height="170px" width="120px"
                             alt=""
-                          />
+                          /></td>
+                      <td>Rs.<?php  echo $rowcart['price']?></td>
+
+                      <td style=" width:200px;">
+                      <form action="" method="post">
+                        <div style="display: flex; width:200px;">            
+                        <input type="hidden" value="<?php  echo $rowcart['id']?>" name="update_id">
+                          <input type="number" class="" min="1" name="update_qty" value="<?php  echo $rowcart['qty']?>" max="10" style="width:60px; margin-right:10px; " >
+                          <input type="submit" value="update" class="btn btn-primary" name="update_cart_quantity">
                         </div>
-                        <div class="media-body">
-                          <p>' . $rowitem['book_name'] . '</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <h5>' . $rowitem['price'] . '</h5>
-                    </td>
-                    <td>
-                      <div class="product_count">
-                        <span class="input-number-decrement">
-                          <i class="bi bi-caret-down-fill"></i
-                        ></span>
-                        <input
-                          class="input-number"
-                          type="text"
-                          value="if"
-                          min="0"
-                          max="10"
-                        />
-                        <span class="input-number-increment">
-                          <i class="bi bi-caret-up-fill"></i
-                        ></span>
-                      </div>
-                    </td>
-                    <td>
-                      <h5>$720.00</h5>
-                    </td>
-                  </tr>';
-                    }
-                  ?>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <h5>Subtotal</h5>
-                    </td>
-                    <td>
-                      <h5>$2160.00</h5>
-                    </td>
-                  </tr>
-                  <tr class="shipping_area">
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <h5>Organization</h5>
-                    </td>
-                    <td>
-                      <div class="shipping_box">
+                      </form> 
+                      </td>
+                      <?php
+                        $total = $total + ( $rowcart['price']* $rowcart['qty']) ;
+                        $tqty = $tqty +  $rowcart['qty'] ;
 
-                        <h6>
-                          Select for donation
-                          <i class="fa fa-caret-down" aria-hidden="true"></i>
-                        </h6>
-                        <select
-                          class="shipping_select section_bg"
-                          style="display: none"
-                        >
-                       
-                            <?php
-                            while ($roworg = mysqli_fetch_assoc($resultorg)) {
+                      ?>
+                      <td>Rs.<?php  echo $rowcart['price']* $rowcart['qty']?></td>
+                      <td>
+                           <a style="color: red;"  href="cart.php?remove=<?php echo $rowcart['id'] ?>">Remove</a>
+                      </td>
+                    </tr>
 
+                      <?php
 
-                                echo '
-                          <option value="'.$roworg['org_id'].'">'.$roworg['org_name'].'</option>';
                             }
-                            ?>
+
+                        } else {
+                            echo 'no product';
+                        }
+                        ?>
+
+
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>                 
+                      <td></td>
+                      <td>Subtotal</td>       
+                     
+                      <td>Rs.<?php echo isset($total) ? $total : 0;?></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>                 
+                      <td>Organization</td>
+                      <!-- <td>Organizati on</td>          -->
+                      <td > 
+                      <div class="shipping_box" style="padding-top: 25px;">
+
+                      <form action="" method="post">
+
+                          <input type="hidden" name="subtotal" value="<?php echo $total;?>" >
+                          <input type="hidden" name="tqty" value="<?php echo $tqty; ?>">
+                 
+
+
+                          <select class="shipping_select section_bg"
+                                  style="display: none" name="org" id="">
+                                  <!-- <option value="">sssssssssssssssssss</option> -->
+                                  <?php
+                                    $selectorg = mysqli_query($con, "SELECT * FROM organizations ");
+
+                                    if (mysqli_num_rows($selectorg) > 0) {
+                                        while ($roworg = mysqli_fetch_assoc($selectorg)) {
+                                            echo '<option value="' . $roworg['org_id'] . '">' . $roworg['org_name'] . '</option>';
+                                        }
+                                    }
+                                    ?>
+
+                                </select>  
+
+                        <input class="post_code" name="smsg" type="text" placeholder="Special Message" />
+                        <input type="submit" class="btn" value="Proceed to checkout" name="checkout_btn">
+                        </form>
+                                 
+       
+
+
+                                  </div>
+   
+                     
+
+                      </td>
+        
+          
+                    </tr>
+
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>                 
+                      <td></td>
+                      <td>
+                        <!-- <form action="" method="post">
+                          <input type="text" name="subtotal" >
+                          <input type="text" name="orgn"  >
+                          <input type="text" name="qty" >
+
+                        <input class="post_code" type="text" placeholder="Special Message" />
+                        <input type="submit" class="btn" value="Proceed to checkout" name="checkout_btn">
+                        </form> -->
+                   
+
+                      </td>
+                                  
+                      <!-- <td >
+                        <select name="" >
+                          <option value="" selected>aaaaaa</option>
+                          
                         </select>
-                       
-                        <input
-                          class="post_code"
-                          type="text"
-                          placeholder="Special Message"
-                        />
-                        <a class="btn" href="checkout.php">Proceed to checkout</a>
-                      </div>
-                    </td>
-                  </tr>
+                      </td> -->
+                    </tr>
                 </tbody>
               </table>
             </div>
@@ -401,7 +455,7 @@
         </div>
       </div>
     </footer>
-
+  
     <script src="assets/js/vendor/modernizr-3.5.0.min.js"></script>
     <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
