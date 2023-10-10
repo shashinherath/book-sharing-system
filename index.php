@@ -221,7 +221,7 @@
                             Sowing Seeds of Literacy!
                           </h1>
                           <a
-                            href="#"
+                            href="books.php"
                             class="btn hero-btn"
                             data-animation="bounceIn"
                             data-delay=".8s"
@@ -249,7 +249,7 @@
                             Cultivating Bright Futures!
                           </h1>
                           <a
-                            href="#"
+                            href="books.php"
                             class="btn hero-btn"
                             data-animation="bounceIn"
                             data-delay=".8s"
@@ -277,7 +277,7 @@
                             Read, Donate, Repeat!
                           </h1>
                           <a
-                            href="#"
+                            href="books.php"
                             class="btn hero-btn"
                             data-animation="bounceIn"
                             data-delay=".8s"
