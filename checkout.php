@@ -1,13 +1,13 @@
-
 <?php
 session_start();
 include('database.php');
 
 $email = $_SESSION['email'];
+$_SESSION['donation_ok'] = false;
 
 if (isset($_POST['pay_donate'])) {
     // Retrieve data from session variables
-  
+
 
     $org = mysqli_real_escape_string($con, $_SESSION['org']);
     $subtotal = mysqli_real_escape_string($con, $_SESSION['subtotal']);
@@ -16,13 +16,14 @@ if (isset($_POST['pay_donate'])) {
 
     $queryadd = "INSERT INTO donations (total_qty, total_price, organization, user)
                  VALUES ('$tqty', '$subtotal', '$org', '$email')";
-              
+
     $resultadd = mysqli_query($con, $queryadd);
-    
+
     if ($resultadd) {
         $sql = "DELETE FROM cart WHERE user_email = '$email'";
         $result = mysqli_query($con, $sql);
         $_SESSION['cartcnt'] = 0;
+        $_SESSION['donation_ok'] = true;
         header('location:index.php');
 
     } else {
@@ -31,7 +32,6 @@ if (isset($_POST['pay_donate'])) {
 }
 
 ?>
-  
 
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
@@ -46,7 +46,7 @@ if (isset($_POST['pay_donate'])) {
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/checkout/">
 
-    
+
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
@@ -130,12 +130,13 @@ if (isset($_POST['pay_donate'])) {
         display: block !important;
       }
     </style>
-
     
     <!-- Custom styles for this template -->
     <link href="CSS/checkout.css" rel="stylesheet">
+
   </head>
   <body class="bg-body-tertiary">
+
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
       <symbol id="check2" viewBox="0 0 16 16">
         <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
@@ -336,7 +337,7 @@ if (isset($_POST['pay_donate'])) {
 
           <hr class="my-4">
 
-            <input type="submit" class="w-100 btn btn-primary btn-lg" value="Pay & Donate" name="pay_donate" >
+            <input type="submit" class="w-100 btn btn-primary btn-lg" value="Pay & Donate" name="pay_donate">
           </form>
 
         
