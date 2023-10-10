@@ -53,8 +53,23 @@
     <link rel="stylesheet" href="assets/css/slick.css" />
     <link rel="stylesheet" href="assets/css/nice-select.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   </head>
   <body>
+
+  <?php
+  if (isset($_SESSION['donation_ok']) ? $_SESSION['donation_ok'] == true : false) {
+      ?>
+
+      <script>
+          swal("Donation Successfully!", "Your payment has been successfully processed.", "success");
+      </script>
+
+      <?php
+      $_SESSION['donation_ok'] = false;
+  }
+  ?>
     <!-- Navigation bar -->
 
     <header>
