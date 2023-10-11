@@ -143,7 +143,7 @@
             break;
 
         case true:
-    echo'
+            echo '
     
     <!-- <body data-layout="horizontal" data-topbar="dark"> -->
 
@@ -152,7 +152,7 @@
 
             
             <header id="page-topbar">
-                <div class="navbar-header">
+                <div class="navbar-header" style="background-color: #0f9cf3 !important;">
                     <div class="d-flex">
                         <!-- LOGO -->
                         <div class="navbar-brand-box">
@@ -186,7 +186,7 @@
                             <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                
-                                <span class="d-none d-xl-inline-block ms-1">'.$_SESSION['name'].'</span>
+                                <span class="d-none d-xl-inline-block ms-1">' . $_SESSION['name'] . '</span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
@@ -286,26 +286,50 @@
                     <div class="container-fluid">';
 
 
+            switch ($menu) {
 
-                        switch ($menu) {
+                default:
+                    $queryucount = "SELECT COUNT(email) as ucount FROM user";
+                    $resultucount = mysqli_query($con, $queryucount);
+                    $rowucount = mysqli_fetch_assoc($resultucount);
 
-                            default:
-                                $queryucount = "SELECT COUNT(email) FROM user";
-                                $resultucount = mysqli_query($con, $queryucount);
-                                $rowucount = mysqli_fetch_assoc($resultucount);
-                        echo '
+                    $queryadmin = "SELECT COUNT(email) as admin FROM admin";
+                    $resultadmin = mysqli_query($con, $queryadmin);
+                    $rowadmin = mysqli_fetch_assoc($resultadmin);
+
+                    $querysales = "SELECT SUM(total_price) as sales FROM donations";
+                    $resultsales = mysqli_query($con, $querysales);
+                    $rowsales = mysqli_fetch_assoc($resultsales);
+
+                    $querydcount = "SELECT COUNT(id) as dcount FROM donations";
+                    $resultdcount = mysqli_query($con, $querydcount);
+                    $rowdcount = mysqli_fetch_assoc($resultdcount);
+
+                    $querybcount = "SELECT COUNT(isbn) as bcount FROM books";
+                    $resultbcount = mysqli_query($con, $querybcount);
+                    $rowbcount = mysqli_fetch_assoc($resultbcount);
+
+                    $queryocount = "SELECT COUNT(org_name) as ocount FROM organizations";
+                    $resultocount = mysqli_query($con, $queryocount);
+                    $rowocount = mysqli_fetch_assoc($resultocount);
+
+                    $querydbcount = "SELECT SUM(total_donations) as dbcount FROM organizations";
+                    $resultdbcount = mysqli_query($con, $querydbcount);
+                    $rowdbcount = mysqli_fetch_assoc($resultdbcount);
+
+                    echo '
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0">Dashboard</h4>
                         </div>
 
-                        <div class="row">
+                    <div class="row" style="display: flex; justify-content: center; align-items: center;">
                         <div class="col-xl-3 col-md-6">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex">
                                         <div class="flex-grow-1">
-                                            <p class="text-truncate font-size-14 mb-2">Users</p>
-                                            <h4 class="mb-2">'.$rowucount['COUNT(email)'].'</h4>
+                                            <p class="text-truncate font-size-14 mb-2">Total Users</p>
+                                            <h4 class="mb-2">' . $rowucount['ucount'] . '</h4>
                                             <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>16.2%</span>from previous period</p>
                                         </div>
                                         <div class="avatar-sm">
@@ -323,13 +347,32 @@
                                 <div class="card-body">
                                     <div class="d-flex">
                                         <div class="flex-grow-1">
-                                            <p class="text-truncate font-size-14 mb-2">Total Sales</p>
-                                            <h4 class="mb-2">1452</h4>
+                                            <p class="text-truncate font-size-14 mb-2">Total Admins</p>
+                                            <h4 class="mb-2">'.$rowadmin['admin'].'</h4>
                                             <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>9.23%</span>from previous period</p>
                                         </div>
                                         <div class="avatar-sm">
                                                 <span class="avatar-title bg-light text-primary rounded-3">
-                                                    <i class="ri-shopping-cart-2-line font-size-24"></i>
+                                                    <i class="ri-admin-line font-size-24"></i>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div><!-- end cardbody -->
+                            </div><!-- end card -->
+                        </div>
+                    
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        <div class="flex-grow-1">
+                                            <p class="text-truncate font-size-14 mb-2">Total Donations</p>
+                                            <h4 class="mb-2">'.$rowdcount['dcount'].'</h4>
+                                            <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>9.23%</span>from previous period</p>
+                                        </div>
+                                        <div class="avatar-sm">
+                                                <span class="avatar-title bg-light text-primary rounded-3">
+                                                    <i class="ri-gift-2-line font-size-24"></i>
                                                 </span>
                                         </div>
                                     </div>
@@ -338,19 +381,19 @@
                         </div>
                     </div>
 
-                        <div class="row">
+                        <div class="row" style="display: flex; justify-content: center; align-items: center;">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
-                                                <p class="text-truncate font-size-14 mb-2">New Users</p>
-                                                <h4 class="mb-2">8246</h4>
+                                                <p class="text-truncate font-size-14 mb-2">Organizations</p>
+                                                <h4 class="mb-2">'.$rowocount['ocount'].'</h4>
                                                 <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>16.2%</span>from previous period</p>
                                             </div>
                                             <div class="avatar-sm">
                                                 <span class="avatar-title bg-light text-primary rounded-3">
-                                                    <i class="ri-user-3-line font-size-24"></i>
+                                                    <i class="ri-building-line font-size-24"></i>
                                                 </span>
                                             </div>
                                         </div>
@@ -363,55 +406,96 @@
                                     <div class="card-body">
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
-                                                <p class="text-truncate font-size-14 mb-2">Total Sales</p>
-                                                <h4 class="mb-2">1452</h4>
+                                                <p class="text-truncate font-size-14 mb-2">Total Donated Books</p>
+                                                <h4 class="mb-2">'.$rowdbcount['dbcount'].'</h4>
                                                 <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>9.23%</span>from previous period</p>
                                             </div>
                                             <div class="avatar-sm">
                                                 <span class="avatar-title bg-light text-primary rounded-3">
-                                                    <i class="ri-shopping-cart-2-line font-size-24"></i>
+                                                    <i class="ri-book-3-line font-size-24"></i>
                                                 </span>
                                             </div>
                                         </div>
                                     </div><!-- end cardbody -->
                                 </div><!-- end card -->
                             </div>
-                        </div>';
-                        break;
+                            
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex">
+                                            <div class="flex-grow-1">
+                                                <p class="text-truncate font-size-14 mb-2">Available Books</p>
+                                                <h4 class="mb-2">'.$rowbcount['bcount'].'</h4>
+                                                <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>9.23%</span>from previous period</p>
+                                            </div>
+                                            <div class="avatar-sm">
+                                                <span class="avatar-title bg-light text-primary rounded-3">
+                                                    <i class="ri-book-2-line font-size-24"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div><!-- end cardbody -->
+                                </div><!-- end card -->
+                            </div>
+                        </div>
+                        
+                    <div class="row" style="display: flex; justify-content: center; align-items: center;">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        <div class="flex-grow-1">
+                                            <p class="text-truncate font-size-14 mb-2">Total Sales(Rs)</p>
+                                            <h4 class="mb-2">'.$rowsales['sales'].'</h4>
+                                            <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>9.23%</span>from previous period</p>
+                                        </div>
+                                        <div class="avatar-sm">
+                                                <span class="avatar-title bg-light text-primary rounded-3">
+                                                    <i class="mdi mdi-currency-usd font-size-24"></i>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div><!-- end cardbody -->
+                            </div><!-- end card -->
+                        </div>
+                    </div>';
 
-                            case "users":
-                                if (isset($_POST['user_add'])) {
-                                    $uname = $_POST['uname'];
-                                    $uemail = $_POST['uemail'];
-                                    $uphone = $_POST['uphone'];
-                                    $upassword = $_POST['upassword'];
-                                    $ucpassword = $_POST['ucpassword'];
+                    break;
 
-                                    if (!empty($uemail) && !empty($upassword) && $upassword == $ucpassword) {
-                                        $queryaddu = "INSERT INTO user (name, email, phone, password, cpassword) VALUES ('$uname','$uemail','$uphone','$upassword','$ucpassword')";
-                                        if (mysqli_query($con, $queryaddu)) {
+                case "users":
+                    if (isset($_POST['user_add'])) {
+                        $uname = $_POST['uname'];
+                        $uemail = $_POST['uemail'];
+                        $uphone = $_POST['uphone'];
+                        $upassword = $_POST['upassword'];
+                        $ucpassword = $_POST['ucpassword'];
 
-                                        } else {
-                                            echo "<script type='text/javascript'> alert('Error: " . mysqli_error($con) . "' ) </script>";
-                                        }
-                                    } else {
-                                        echo "<script type='text/javascript'> alert('Please enter some valid information')</script>";
-                                    }
-                                }
+                        if (!empty($uemail) && !empty($upassword) && $upassword == $ucpassword) {
+                            $queryaddu = "INSERT INTO user (name, email, phone, password, cpassword) VALUES ('$uname','$uemail','$uphone','$upassword','$ucpassword')";
+                            if (mysqli_query($con, $queryaddu)) {
 
-                                if (isset($_POST['delete_user'])) {
-                                    $user_id = $_POST['user_id'];
+                            } else {
+                                echo "<script type='text/javascript'> alert('Error: " . mysqli_error($con) . "' ) </script>";
+                            }
+                        } else {
+                            echo "<script type='text/javascript'> alert('Please enter some valid information')</script>";
+                        }
+                    }
 
-                                    $querydeleteu = "DELETE FROM user WHERE id = $user_id";
+                    if (isset($_POST['delete_user'])) {
+                        $user_id = $_POST['user_id'];
 
-                                    if (mysqli_query($con, $querydeleteu)) {
+                        $querydeleteu = "DELETE FROM user WHERE id = $user_id";
 
-                                    } else {
-                                        echo "Error: " . mysqli_error($con);
-                                    }
-                                }
+                        if (mysqli_query($con, $querydeleteu)) {
 
-                                echo '
+                        } else {
+                            echo "Error: " . mysqli_error($con);
+                        }
+                    }
+
+                    echo '
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0">Users</h4>
                         </div>
@@ -432,35 +516,35 @@
                                             </thead><!-- end thead -->
                                             <tbody>';
 
-                                $queryusers = "SELECT * FROM user";
-                                $resultusers = mysqli_query($con, $queryusers);
+                    $queryusers = "SELECT * FROM user";
+                    $resultusers = mysqli_query($con, $queryusers);
 
-                                while ($rowusers = mysqli_fetch_assoc($resultusers)) {
+                    while ($rowusers = mysqli_fetch_assoc($resultusers)) {
 
-                                    echo '
+                        echo '
                                                 <tr>
-                                                    <td><h6 class="mb-0">'.$rowusers['id'].'</h6></td>
-                                                    <td>'.$rowusers['name'].'</td>
+                                                    <td><h6 class="mb-0">' . $rowusers['id'] . '</h6></td>
+                                                    <td>' . $rowusers['name'] . '</td>
                                                     <td>
-                                                        '.$rowusers['email'].'
+                                                        ' . $rowusers['email'] . '
                                                     </td>
                                                     <td>
-                                                        '.$rowusers['phone'].'
+                                                        ' . $rowusers['phone'] . '
                                                     </td>
                                                     <td>
                                                         <button type="button" class="btn btn-success btn-rounded waves-effect waves-light">Update</button>
                                                     </td>
                                                     <td>
                                                         <form method="post">
-                                                            <input type="hidden" name="user_id" value="'.$rowusers['id'].'">
+                                                            <input type="hidden" name="user_id" value="' . $rowusers['id'] . '">
                                                             <button type="submit" class="btn btn-danger btn-rounded waves-effect waves-light" name="delete_user">Delete</button>
                                                         </form>
                                                     </td>
                                                     
                                                 </tr>';
-                                }
+                    }
 
-                                echo '    
+                    echo '    
                                                  <!-- end -->
                                                  
                                                  <!-- end -->
@@ -537,12 +621,12 @@
                                 </div>
                                 <!-- end card -->
                             </div>';
-                                break;
+                    break;
 
-                            case "books":
-                                $querybook = "SELECT * FROM books";
-                                $resultbook = mysqli_query($con, $querybook);
-                        echo '
+                case "books":
+                    $querybook = "SELECT * FROM books";
+                    $resultbook = mysqli_query($con, $querybook);
+                    echo '
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0">Books</h4>
                         </div>
@@ -565,22 +649,22 @@
                                             </thead><!-- end thead -->
                                             <tbody>';
 
-                                                    while ($rowbook = mysqli_fetch_assoc($resultbook)) {
+                    while ($rowbook = mysqli_fetch_assoc($resultbook)) {
 
-                                                        echo '
+                        echo '
                                                 <tr>
-                                                    <td><h6 class="mb-0">'.$rowbook['book_name'].'</h6></td>
-                                                    <td>'.$rowbook['author'].'</td>
+                                                    <td><h6 class="mb-0">' . $rowbook['book_name'] . '</h6></td>
+                                                    <td>' . $rowbook['author'] . '</td>
                                                     <td>
-                                                        '.$rowbook['category'].'
+                                                        ' . $rowbook['category'] . '
                                                     </td>
                                                     <td>
-                                                        '.$rowbook['isbn'].'
+                                                        ' . $rowbook['isbn'] . '
                                                     </td>
                                                     <td>
-                                                        <img src="'.$rowbook['image'].'" height="50px" width="25px">
+                                                        <img src="' . $rowbook['image'] . '" height="50px" width="25px">
                                                     </td>
-                                                    <td>'.$rowbook['price'].'</td>
+                                                    <td>' . $rowbook['price'] . '</td>
                                                     <td>
                                                         <button type="button" class="btn btn-success btn-rounded waves-effect waves-light">Update</button>
                                                     </td>
@@ -591,9 +675,9 @@
                                                         </form>
                                                     </td>
                                                 </tr>';
-                                                    }
+                    }
 
-                                                echo '    
+                    echo '    
                                                  <!-- end -->
                                                  
                                                  <!-- end -->
@@ -603,12 +687,12 @@
                                 </div><!-- end card -->
                             </div><!-- end card -->
                         </div>';
-                            break;
+                    break;
 
-                            case "organizations":
-                                $queryorg = "SELECT * FROM organizations";
-                                $resultorg = mysqli_query($con, $queryorg);
-                                echo '
+                case "organizations":
+                    $queryorg = "SELECT * FROM organizations";
+                    $resultorg = mysqli_query($con, $queryorg);
+                    echo '
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0">Organizations</h4>
                         </div>
@@ -629,17 +713,17 @@
                                             </thead><!-- end thead -->
                                             <tbody>';
 
-                                while ($roworg = mysqli_fetch_assoc($resultorg)) {
+                    while ($roworg = mysqli_fetch_assoc($resultorg)) {
 
-                                    echo '
+                        echo '
                                                 <tr>
-                                                    <td><h6 class="mb-0">'.$roworg['org_id'].'</h6></td>
-                                                    <td>'.$roworg['org_name'].'</td>
+                                                    <td><h6 class="mb-0">' . $roworg['org_id'] . '</h6></td>
+                                                    <td>' . $roworg['org_name'] . '</td>
                                                     <td>
-                                                        '.$roworg['total_donations'].'
+                                                        ' . $roworg['total_donations'] . '
                                                     </td>
                                                     <td>
-                                                        <img src="'.$roworg['image'].'" height="50px" width="75px">
+                                                        <img src="' . $roworg['image'] . '" height="50px" width="75px">
                                                     </td>
                                                     <td>
                                                         <button type="button" class="btn btn-success btn-rounded waves-effect waves-light">Update</button>
@@ -652,9 +736,9 @@
                                                     </td>
                                                     
                                                 </tr>';
-                                }
+                    }
 
-                                echo '    
+                    echo '    
                                                  <!-- end -->
                                                  
                                                  <!-- end -->
@@ -664,9 +748,64 @@
                                 </div><!-- end card -->
                             </div><!-- end card -->
                         </div>';
-                                break;
-                         }
-                        echo '
+                    break;
+
+                case "contact":
+                    $querycontact = "SELECT * FROM contact";
+                    $resultcontact = mysqli_query($con, $querycontact);
+                    echo '
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0">Contact</h4>
+                        </div>
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-centered mb-0 align-middle table-hover table-nowrap">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Message</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead><!-- end thead -->
+                                            <tbody>';
+
+
+
+                    while ($rowcontact = mysqli_fetch_assoc($resultcontact)) {
+
+                            echo '
+                                                <tr>
+                                                    <td><h6 class="mb-0">' . $rowcontact['name'] . '</h6></td>
+                                                    <td>' . $rowcontact['email'] . '</td>
+                                                    <td>
+                                                        ' . $rowcontact['message'] . '
+                                                    </td>
+                                                    <td>
+                                                        <form method="post">
+                                                            <input type="hidden" name="user_id" value="">
+                                                            <button type="submit" class="btn btn-danger btn-rounded waves-effect waves-light" name="">Delete</button>
+                                                        </form>
+                                                    </td>
+                                                    
+                                                </tr>';
+                    }
+
+                    echo '    
+                                                 <!-- end -->
+                                                 
+                                                 <!-- end -->
+                                            </tbody><!-- end tbody -->
+                                        </table> <!-- end table -->
+                                    </div>
+                                </div><!-- end card -->
+                            </div><!-- end card -->
+                        </div>';
+                    break;
+            }
+            echo '
                     </div>
                     
                 </div>
@@ -694,7 +833,7 @@
         <!-- END layout-wrapper -->
         ';
             break;
-        }
+    }
     ?>
 
 
