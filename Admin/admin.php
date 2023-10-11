@@ -226,8 +226,8 @@
                             <li class="menu-title">Menu</li>
 
                             <li>
-                                <a href="admin.php" class="waves-effect">
-                                    <i class="ri-dashboard-line"></i>Dashboard
+                                <a href="admin.php" class="waves-effect" style="color: '.($menu == null ? "#0f9cf3!important" : "#6c757d !important").'">
+                                    <i class="ri-dashboard-line" style="color: '.($menu == null ? "#0f9cf3!important" : "#6c757d !important").'"></i>Dashboard
                                 </a>
                             </li>
                         
@@ -243,26 +243,26 @@
                                 </ul>
                             </li> -->
                             <li>
-                                <a href="admin.php?menu=users" class="waves-effect">
-                                    <i class="ri-user-line"></i>Users
+                                <a href="admin.php?menu=users" class="waves-effect" style="color: '.($menu == "users" ? "#0f9cf3!important" : "#6c757d !important").'">
+                                    <i class="ri-user-line" style="color: '.($menu == "users" ? "#0f9cf3!important" : "#6c757d !important").'"></i>Users
                                 </a>
                             </li>
                         
                             <li>
-                                <a href="admin.php?menu=books" class="waves-effect">
-                                    <i class="ri-book-line"></i>Books
+                                <a href="admin.php?menu=books" class="waves-effect" style="color: '.($menu == "books" ? "#0f9cf3!important" : "#6c757d !important").'">
+                                    <i class="ri-book-line" style="color: '.($menu == "books" ? "#0f9cf3!important" : "#6c757d !important").'"></i>Books
                                 </a>
                             </li>
                         
                             <li>
-                                <a href="admin.php?menu=organizations" class="waves-effect">
-                                    <i class="ri-building-line"></i>Organizations
+                                <a href="admin.php?menu=organizations" class="waves-effect" style="color: '.($menu == "organizations" ? "#0f9cf3!important" : "#6c757d !important").'">
+                                    <i class="ri-building-line" style="color: '.($menu == "organizations" ? "#0f9cf3!important" : "#6c757d !important").'"></i>Organizations
                                 </a>
                             </li>
                         
                             <li>
-                                <a href="admin.php?menu=contact" class="waves-effect">
-                                    <i class="ri-contacts-line"></i>Contact
+                                <a href="admin.php?menu=contact" class="waves-effect" style="color: '.($menu == "contact" ? "#0f9cf3!important" : "#6c757d !important").'">
+                                    <i class="ri-contacts-line" style="color: '.($menu == "contact" ? "#0f9cf3!important" : "#6c757d !important").'"></i>Contact
                                 </a>
                             </li>
                         
@@ -330,7 +330,7 @@
                                         <div class="flex-grow-1">
                                             <p class="text-truncate font-size-14 mb-2">Total Users</p>
                                             <h4 class="mb-2">' . $rowucount['ucount'] . '</h4>
-                                            <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>16.2%</span>from previous period</p>
+                                            <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>34.5%</span>from previous period</p>
                                         </div>
                                         <div class="avatar-sm">
                                                 <span class="avatar-title bg-light text-primary rounded-3">
@@ -349,7 +349,7 @@
                                         <div class="flex-grow-1">
                                             <p class="text-truncate font-size-14 mb-2">Total Admins</p>
                                             <h4 class="mb-2">'.$rowadmin['admin'].'</h4>
-                                            <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>9.23%</span>from previous period</p>
+                                            <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>50.0%</span>from previous period</p>
                                         </div>
                                         <div class="avatar-sm">
                                                 <span class="avatar-title bg-light text-primary rounded-3">
@@ -368,7 +368,7 @@
                                         <div class="flex-grow-1">
                                             <p class="text-truncate font-size-14 mb-2">Total Donations</p>
                                             <h4 class="mb-2">'.$rowdcount['dcount'].'</h4>
-                                            <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>9.23%</span>from previous period</p>
+                                            <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>15.73%</span>from previous period</p>
                                         </div>
                                         <div class="avatar-sm">
                                                 <span class="avatar-title bg-light text-primary rounded-3">
@@ -389,7 +389,7 @@
                                             <div class="flex-grow-1">
                                                 <p class="text-truncate font-size-14 mb-2">Organizations</p>
                                                 <h4 class="mb-2">'.$rowocount['ocount'].'</h4>
-                                                <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>16.2%</span>from previous period</p>
+                                                <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>20.0%</span>from previous period</p>
                                             </div>
                                             <div class="avatar-sm">
                                                 <span class="avatar-title bg-light text-primary rounded-3">
@@ -408,7 +408,7 @@
                                             <div class="flex-grow-1">
                                                 <p class="text-truncate font-size-14 mb-2">Total Donated Books</p>
                                                 <h4 class="mb-2">'.$rowdbcount['dbcount'].'</h4>
-                                                <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>9.23%</span>from previous period</p>
+                                                <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>10.2%</span>from previous period</p>
                                             </div>
                                             <div class="avatar-sm">
                                                 <span class="avatar-title bg-light text-primary rounded-3">
@@ -427,7 +427,7 @@
                                             <div class="flex-grow-1">
                                                 <p class="text-truncate font-size-14 mb-2">Available Books</p>
                                                 <h4 class="mb-2">'.$rowbcount['bcount'].'</h4>
-                                                <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>9.23%</span>from previous period</p>
+                                                <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>5.0%</span>from previous period</p>
                                             </div>
                                             <div class="avatar-sm">
                                                 <span class="avatar-title bg-light text-primary rounded-3">
@@ -448,7 +448,7 @@
                                         <div class="flex-grow-1">
                                             <p class="text-truncate font-size-14 mb-2">Total Sales(Rs)</p>
                                             <h4 class="mb-2">'.$rowsales['sales'].'</h4>
-                                            <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>9.23%</span>from previous period</p>
+                                            <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>42.84%</span>from previous period</p>
                                         </div>
                                         <div class="avatar-sm">
                                                 <span class="avatar-title bg-light text-primary rounded-3">
