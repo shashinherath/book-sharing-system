@@ -662,9 +662,9 @@
                                                         ' . $rowbook['isbn'] . '
                                                     </td>
                                                     <td>
-                                                        <img src="' . $rowbook['image'] . '" height="50px" width="25px">
+                                                        <img src="' . $rowbook['image'] . '" height="60px" width="40px">
                                                     </td>
-                                                    <td>' . $rowbook['price'] . '</td>
+                                                    <td>Rs. ' . $rowbook['price'] . '</td>
                                                     <td>
                                                         <button type="button" class="btn btn-success btn-rounded waves-effect waves-light">Update</button>
                                                     </td>
@@ -723,14 +723,14 @@
                                                         ' . $roworg['total_donations'] . '
                                                     </td>
                                                     <td>
-                                                        <img src="' . $roworg['image'] . '" height="50px" width="75px">
+                                                        <img src="' . $roworg['image'] . '" height="60px" width="100px">
                                                     </td>
                                                     <td>
                                                         <button type="button" class="btn btn-success btn-rounded waves-effect waves-light">Update</button>
                                                     </td>
                                                     <td>
                                                         <form method="post">
-                                                            <input type="hidden" name="user_id" value="">
+                                                            <input type="hidden" name="" value="">
                                                             <button type="submit" class="btn btn-danger btn-rounded waves-effect waves-light" name="">Delete</button>
                                                         </form>
                                                     </td>
@@ -751,6 +751,23 @@
                     break;
 
                 case "contact":
+
+                    if (isset($_POST['delete_contact'])) {
+                        $contact_uid = $_POST['contact_uid'];
+
+                        $queryd_uid = "DELETE FROM contact WHERE id = $contact_uid";
+
+                        mysqli_query($con, $queryd_uid);
+                    }
+
+                    if (isset($_POST['m_read'])) {
+                        $contact_uid = $_POST['contact_uid'];
+
+                        $queryr_uid = "UPDATE contact SET `read` = 1 WHERE id = $contact_uid";
+
+                        mysqli_query($con, $queryr_uid);
+                    }
+
                     $querycontact = "SELECT * FROM contact";
                     $resultcontact = mysqli_query($con, $querycontact);
                     echo '
@@ -773,7 +790,6 @@
                                             <tbody>';
 
 
-
                     while ($rowcontact = mysqli_fetch_assoc($resultcontact)) {
 
                             echo '
@@ -783,17 +799,30 @@
                                                     <td>
                                                         ' . $rowcontact['message'] . '
                                                     </td>
+                                                    <form method="post">
+                                                        <input type="hidden" name="contact_uid" value="'.$rowcontact['id'].'">';
+
+                            if ($rowcontact['read'] == 1) {
+                                echo'
                                                     <td>
-                                                        <form method="post">
-                                                            <input type="hidden" name="user_id" value="">
-                                                            <button type="submit" class="btn btn-danger btn-rounded waves-effect waves-light" name="">Delete</button>
-                                                        </form>
+                                                            <button type="submit" class="btn btn-danger btn-rounded waves-effect waves-light" name="delete_contact">Delete</button>
                                                     </td>
                                                     
                                                 </tr>';
+                            }
+                            else {
+                                echo'
+                                                    <td>
+                                                            <button type="submit" class="btn btn-info btn-rounded waves-effect waves-light" name="m_read">Mark as Read</button>
+                                                    </td>
+                                                    
+                                                </tr>';
+                            }
+
+                            echo '                  </form>';
                     }
 
-                    echo '    
+                    echo '               
                                                  <!-- end -->
                                                  
                                                  <!-- end -->
