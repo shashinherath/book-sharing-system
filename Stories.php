@@ -210,9 +210,7 @@ if (isset($_SESSION['email'])) {
           <div class="card-body">
             <h5 class="card-title">2023/05/27</h5>
             <p class="card-text">
-              Little Hearts is a national fundraising project to build a
-              Cardiac and Critical Care Complex at Lady Ridgeway Children's
-              Hospital.
+            One of our remarkable endeavors was in partnership with the 'Read to Rise' foundation in South Africa. In September 2023, we donated a vast collection of age-appropriate books to their initiative, enriching the reading experiences of underprivileged children in local schools
             </p>
 
           </div>
@@ -222,9 +220,7 @@ if (isset($_SESSION['email'])) {
           <div class="card-body">
             <h5 class="card-title">2023/03/20</h5>
             <p class="card-text">
-              The Child Mind Institute is an independent nonprofit dedicated
-              to transforming the lives of children struggling with mental
-              health and learning disorders.
+            In 2023, we collaborated with the 'Books for All' organization in India. Together, we organized a book donation drive, collecting thousands of books that were distributed to schools, libraries, and orphanages in rural communities. It was a testament to how books can transform lives."
             </p>
 
           </div>
@@ -234,10 +230,7 @@ if (isset($_SESSION['email'])) {
           <div class="card-body">
             <h5 class="card-title">2023/01/09</h5>
             <p class="card-text">
-              March of Dimes is a nonprofit organization committed to ending
-              preventable maternal health risks and death, ending
-              preventable preterm birth and infant death and closing the
-              health equity gap for all families.
+            Our impact also reached remote areas in Southeast Asia, where we worked closely with the 'Books Beyond Borders' initiative. In 2023, we delivered a shipment of books to their community library project, opening doors to knowledge and empowerment for isolated communities.
             </p>
 
           </div>
@@ -247,11 +240,7 @@ if (isset($_SESSION['email'])) {
           <div class="card-body">
             <h5 class="card-title">2023/01/01</h5>
             <p class="card-text">
-              Pretty In Pink Foundation serves North Carolinians diagnosed
-              with breast cancer who are under-insured or uninsured. When
-              breast cancer is present and medical insurance is not enough,
-              care can be delayed or simply not ever received because of
-              cost barriers.
+            In 2023, we celebrated a significant milestone by donating over 3000 books to schools and libraries in Latin America. This collaborative effort between BookBridge and 'Literacy for All' made quality educational resources accessible to students who previously had limited access to them.
             </p>
 
           </div>
@@ -271,10 +260,7 @@ if (isset($_SESSION['email'])) {
           <div class="card-body">
             <h5 class="card-title">2022/11/15</h5>
             <p class="card-text">
-              We are the Sri Lankan Children Foundation. We bring education to the illiterate children, whose families
-              cannot
-              afford to go to schools and give opportunities to study further
-              so that they can obtain their dreams.
+            Our commitment to making knowledge accessible knows no borders. In 2022, we partnered with the 'Global Book Sharing' project, facilitating the exchange of books between nations. Through this initiative, we witnessed the transformative potential of international book sharing.
             </p>
 
           </div>
@@ -284,10 +270,7 @@ if (isset($_SESSION['email'])) {
           <div class="card-body">
             <h5 class="card-title">2022/10/11</h5>
             <p class="card-text">
-              The holistic approach that CAL models, aims to provide transformational development that is sustainable.
-              We go beyond the
-              surface into underlying root causes of inequality, discrimination, exploitation to ensure the wellbeing,
-              value and equality of a child.
+            In 2022, our collaboration with the 'Books for the Future' foundation brought the magic of books to communities in Africa. We organized mobile libraries that traveled to villages. Witnessing the joy on the faces of those discovering the world within pages was a true testament to the power of books.
             </p>
 
           </div>
@@ -295,12 +278,9 @@ if (isset($_SESSION['email'])) {
         <div class="card" style="width: 18rem">
           <img class="card-img-top" src="assets\img\campaigns\7.png" alt="Card image cap" />
           <div class="card-body">
-            <h5 class="card-title">2022/07/11</h5>
+            <h5 class="card-title">2021/07/11</h5>
             <p class="card-text">
-              We work to keep families together, provide alternative care when needed, support young people on their
-              path to independence,
-              and advocate for the rights of children. Together with donors, partners, communities and governments, we
-              lay the foundations for a brighter future.
+            BookBridge's commitment to fostering lifelong learning took us to partnership with 'Read and Grow'. In 2021, we provided thousands of books to their reading centers, enabling children from underserved communities to explore new worlds and develop a lifelong love for reading.
             </p>
 
           </div>
@@ -308,10 +288,9 @@ if (isset($_SESSION['email'])) {
         <div class="card" style="width: 18rem">
           <img class="card-img-top" src="assets\img\campaigns\8.png" alt="Card image cap" />
           <div class="card-body">
-            <h5 class="card-title">2022/07/22</h5>
+            <h5 class="card-title">2021/05/27</h5>
             <p class="card-text">
-              UNICEF works to protect the rights of every child in Sri Lanka. Our goal is to ensure that all of our
-              children survive, thrive and fulfill their vast potential.
+            In 2021, we extended our reach to the Middle East, collaborating with the 'Open Books, Open Minds' initiative. Our joint effort led to the establishment of community reading spaces in refugee camps, providing solace and knowledge to displaced families.
             </p>
 
           </div>
